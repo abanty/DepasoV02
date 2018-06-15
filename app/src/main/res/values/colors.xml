@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#f83600</color>
     <color name="colorPrimaryDark">#c62b00</color>
-    <color name="colorAccent">#f1b80c</color>
+    <color name="colorAccent">#448AFF</color>
 
     <!--Exportados de DEPASO-->
     <color name="colorFaceDark">#2f4779</color>
