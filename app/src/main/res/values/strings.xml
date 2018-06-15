@@ -1,0 +1,65 @@
+<resources>
+    <string name="app_name">Depasov02</string>
+    <string name="title_activity_referencia">ReferenciaActivity</string>
+    <string name="title_activity_container">ContainerActivity</string>
+    <string name="title_user">Mi Cuenta</string>
+    <string name="title_search">Buscar</string>
+    <string name="title_messages">Mensajes</string>
+    <string name="title_menu">Inicio</string>
+    <string name="title_favorite">Favoritos</string>
+    <string name="title_home">home</string>
+
+    //from Login Depaso V0.1
+    <string name="hint_useremail">Correo electrónico</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="text_button_login">LOGIN</string>
+    <string name="dont_have_account">¿No tienes cuenta?, </string>
+    <string name="create_here"> crea una aquí.</string>
+    <string name="hint_email">Correo</string>
+    <string name="hint_name">Nombre</string>
+    <string name="hint_user">Usuario</string>
+    <string name="hint_confirm_password">Confirmar Contraseña</string>
+    <string name="text_button_createaccount">ÚNETE</string>
+    <string name="toolbar_tittle_createaccount">Crear Cuenta</string>
+    <string name="toolbar_tittle_reset">Restablecer Contraseña</string>
+    <string name="toolbar_tittle_Main">Menu</string>
+    <string name="forgot_password_msg">Necesitamos su correo electrónico registrado para enviar las instrucciones para restablecer la contraseña.</string>
+
+    <string name="minimum_password">Password muy corta, ingresa minimo 6 caracteres!</string>
+
+    <string name="auth_failed">Autentificacion fallida, Revisar su email y clave o registrate</string>
+    <string name="GoogleLog">Continuar con Google</string>
+    <string name="FaceLog">Continuar con Facebook</string>
+    <string name="forgotPass">¿Olvidaste tu contraseña?</string>
+    <string name="tab_home">Depaso</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btn_reset_password">Restablecer Contraseña</string>
+    <string name="lbl_forgot_password">¿Olvidó su contraseña?</string>
+    <string name="close_sesion">Cerrar Sesión</string>
+    <string name="title_product">Title Product</string>
+    <string name="priceword_card">Price</string>
+    <string name="Soles_sign_card">S/.</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, Ut quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</string>
+    <string name="transitionname_picture">transitionnamepicture</string>
+    <string name="usernameCard">User Name</string>
+    <string name="secondword_detail">15sp</string>
+    <string name="ProductnameCard">Product Name</string>
+    <string name="titleimagedetail">Descripción</string>
+    <string name="descriptionhere">Description here</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="accion_buscar_texto">Buscar</string>
+    <string name="accion_configuraciones">Configuracion Cuenta</string>
+    <string name="accion_cerrar_sesion">Cerrar Sesion</string>
+    <string name="text_button_yatienescuenta">Ya tienes una cuenta?</string>
+    <string name="Setup_name">Tu nombre...</string>
+    <string name="Setup_btn_name_text">GUARDAR CAMBIOS</string>
+    <string name="toolbar_tittle_optionuser">Opciones de usuario</string>
+    <string name="text_description">Agrega una descripcion</string>
+    <string name="texto_nuevo_boton_anuncio">Publicar anuncio</string>
+    <string name="tittle_nav_inicio">Inicio</string>
+    <string name="botom_nav_notification">Notificaciones</string>
+    <string name="title_nav_cuenta">Cuenta</string>
+
+
+</resources>

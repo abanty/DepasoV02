@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f83600</color>
+    <color name="colorPrimaryDark">#c62b00</color>
+    <color name="colorAccent">#f1b80c</color>
+
+    <!--Exportados de DEPASO-->
+    <color name="colorFaceDark">#2f4779</color>
+    <color name="colorFacePrimary">#3B5998</color>
+    <color name="colorGoogleDark">#CCCCCC</color>
+    <color name="colorGooglePrimary">#FFFFFF</color>
+    <color name="editTextColorWhite">#FFFFFF</color>
+    <color name="editTextColorRed">#f83800</color>
+    <color name="editTextColorGray">#BDBDBD</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorSecondaryText">#757575</color>
+    <color name="backgroundText_card">#53292929</color>
+    <color name="colorDivider">#BDBDBD</color>
+    <color name="green">#4cd234</color>
+</resources>

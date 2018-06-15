@@ -1,0 +1,38 @@
+<resources>
+    <dimen name="btn_fab_size">56dp</dimen>
+    <dimen name="btn_fab_margins">16dp</dimen>
+    <dimen name="default_elevation">8dp</dimen>
+    <dimen name="comment_avatar_size">56dp</dimen>
+    <dimen name="user_profile_avatar_size">88dp</dimen>
+    <dimen name="global_menu_avatar_size">64dp</dimen>
+    <dimen name="publish_photo_thumbnail_size">96dp</dimen>
+    <dimen name="horizontal_margin">15dp</dimen>
+    <dimen name="vertical_margin">45dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="EditText_TextSize_login">18sp</dimen>
+    <dimen name="paddin_horizontal_login">20dp</dimen>
+    <dimen name="textsize_donthaveaccount">15sp</dimen>
+    <dimen name="edittext_margin_createaccount">10dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="Login_Text_Padding">25dp</dimen>
+    <dimen name="CreateAccount_Text_padding">45dp</dimen>
+    <dimen name="marginTopToolbar">48dp</dimen>
+    <dimen name="height_cardview">200dp</dimen>
+    <dimen name="cornerradius_cardview">4dp</dimen>
+    <dimen name="activity_vertical_marginDown">10dp</dimen>
+    <dimen name="productnamesize">19sp</dimen>
+    <dimen name="priceword_texSize_Card">18sp</dimen>
+    <dimen name="firstword_texSize_Card">15sp</dimen>
+    <dimen name="timecard_MarginLeftCard">5sp</dimen>
+    <dimen name="like_margintop_card">8dp</dimen>
+    <dimen name="appbarlayout_height">256dp</dimen>
+    <dimen name="textsize_usernamedetail">25sp</dimen>
+    <dimen name="textsize_likenamedetail">15sp</dimen>
+    <dimen name="height_divider">1dp</dimen>
+    <dimen name="paddingtop_tittleimagedetail">20dp</dimen>
+    <dimen name="padding_horizontal_TextContentdetail">35dp</dimen>
+    <dimen name="padding_recycler_margin">10dp</dimen>
+    <dimen name="widthPrice">150dp</dimen>
+</resources>

@@ -1,0 +1,71 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="coordinatorLayoutStyle">@style/Widget.Design.CoordinatorLayout</item>
+        <item name="cardViewStyle">@style/CardView</item>
+
+    </style>
+
+    <!--<style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">-->
+        <!--<item name="android:windowBackground">@drawable/background</item>-->
+    <!--</style>-->
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="RaisedButtonDark" parent="Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
+        <item name="colorControlHighlight">@color/colorPrimary</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="RaisedButtonFace" parent="Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/colorFacePrimary</item>
+        <item name="colorControlHighlight">@color/colorFaceDark</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="RaisedButtonGoogle" parent="Theme.AppCompat.Light">
+        <item name="colorButtonNormal">@color/colorGooglePrimary</item>
+        <item name="colorControlHighlight">@color/colorGoogleDark</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
+
+    <style name="EditTextWhite" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/editTextColorWhite</item>
+        <item name="android:textSize">@dimen/EditText_TextSize_login</item>
+        <item name="android:textColorPrimary">@color/editTextColorWhite</item>
+        <item name="colorAccent">@color/editTextColorWhite</item>
+        <item name="colorControlNormal">@color/editTextColorWhite</item>
+        <item name="colorControlActivated">@color/editTextColorWhite</item>
+    </style>
+
+    <style name="EditTextBlue" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/EditText_TextSize_login</item>
+        <item name="android:textColorPrimary">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+    </style>
+
+    <style name="EditTextRed" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/editTextColorGray</item>
+        <item name="android:textSize">@dimen/EditText_TextSize_login</item>
+        <item name="android:textColorPrimary">@color/editTextColorRed</item>
+        <item name="colorAccent">@color/editTextColorRed</item>
+        <item name="colorControlNormal">@color/editTextColorRed</item>
+        <item name="colorControlActivated">@color/editTextColorRed</item>
+    </style>
+
+    <style name="setup_name_hint">Tu Nombre</style>
+
+
+</resources>

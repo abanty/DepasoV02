@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "472376504058",
+    "firebase_url": "https://depasov02.firebaseio.com",
+    "project_id": "depasov02",
+    "storage_bucket": "depasov02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:472376504058:android:27fec6d9ba3da365",
+        "android_client_info": {
+          "package_name": "com.example.vavi.depasov02"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "472376504058-nafgopc9d18kr5gr619psacl2p9k50co.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.vavi.depasov02",
+            "certificate_hash": "50b0320723bd6d207344d274bf86b64762eebbcb"
+          }
+        },
+        {
+          "client_id": "472376504058-5f71igbgn2kjc915asr2ncde7l5qegh6.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "472376504058-5f71igbgn2kjc915asr2ncde7l5qegh6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2ILsqvk3Ghixf_HKny7eUJzzK7pwa7tQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "472376504058-5f71igbgn2kjc915asr2ncde7l5qegh6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

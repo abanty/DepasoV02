@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Views.AnunciosActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/nuevo_anuncio_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_degraded"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    </android.support.v7.widget.Toolbar>
+
+
+
+    <ImageView
+        android:id="@+id/anuncio_imagen"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nuevo_anuncio_toolbar"
+        app:srcCompat="@drawable/anuncio_placeholder" />
+
+    <EditText
+        android:id="@+id/anuncio_descripcion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="@string/text_description"
+        android:inputType="textMultiLine"
+        android:maxLength="125"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/anuncio_imagen" />
+
+    <Button
+        android:id="@+id/anuncio_boton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_degraded"
+        android:padding="15dp"
+        android:text="@string/texto_nuevo_boton_anuncio"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion" />
+
+    <ProgressBar
+        android:id="@+id/anuncio_progressbar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:indeterminate="true"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/anuncio_imagen" />
+
+
+</android.support.constraint.ConstraintLayout>
