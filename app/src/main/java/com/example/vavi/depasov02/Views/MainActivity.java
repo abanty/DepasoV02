@@ -48,9 +48,11 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("INMUEBLES");
         toolbar.setTitleTextColor(0xFFFFFFFF);
 
-        bottommenu_nav = findViewById(R.id.barra_nav_menu);
+
 
         if (mAuth.getCurrentUser() != null){
+
+            bottommenu_nav = findViewById(R.id.barra_nav_menu);
 
 //        FRAGMENTOS
         inicioFragment = new InicioFragment();

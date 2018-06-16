@@ -55,7 +55,7 @@ public class InicioFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
 
         adapterAnuncio = new AdapterAnuncio(ListPostanuncios);
-        ListaDepas.setLayoutManager(new LinearLayoutManager(getActivity()));
+        ListaDepas.setLayoutManager(new LinearLayoutManager(container.getContext()));
         ListaDepas.setAdapter(adapterAnuncio);
 
         if(firebaseAuth.getCurrentUser() != null) {
@@ -72,7 +72,7 @@ public class InicioFragment extends Fragment {
                     if (reachedBottom){
 
                         String descripcion = lastVisible.getString("descripcion");
-                        Toast.makeText(container.getContext(), "Reached : " + descripcion, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(container.getContext(), "Alcance : " + descripcion, Toast.LENGTH_SHORT).show();
                         CargarAnuncios();
 
                     }
@@ -81,19 +81,17 @@ public class InicioFragment extends Fragment {
             });
 
             Query primeraconsulta = firebaseFirestore.collection("Anuncios").orderBy("tiempo_marcado",Query.Direction.DESCENDING);
-            primeraconsulta.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            primeraconsulta.addSnapshotListener(getActivity(),new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
 //                    if (documentSnapshots != null) {
- 
                     lastVisible = documentSnapshots.getDocuments().get(documentSnapshots.size() -1);
-
                         for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+
                             if (doc.getType() == DocumentChange.Type.ADDED) {
 
                                 AnuncioModel anuncioModel = doc.getDocument().toObject(AnuncioModel.class);
                                 ListPostanuncios.add(anuncioModel);
-
                                 adapterAnuncio.notifyDataSetChanged();
 
                             }
@@ -111,34 +109,35 @@ public class InicioFragment extends Fragment {
 
      public void CargarAnuncios(){
 
-        Query segundaconsulta = firebaseFirestore.collection("Anuncios")
-                .orderBy("tiempo_marcado",Query.Direction.DESCENDING)
-                .startAfter(lastVisible)
-                .limit(3);
+        if (firebaseAuth.getCurrentUser() != null) {
 
-         segundaconsulta.addSnapshotListener(new EventListener<QuerySnapshot>() {
-             @Override
-             public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
+            Query segundaconsulta = firebaseFirestore.collection("Anuncios")
+                    .orderBy("tiempo_marcado", Query.Direction.DESCENDING)
+                    .startAfter(lastVisible)
+                    .limit(3);
 
-                 if (!documentSnapshots.isEmpty()){
+            segundaconsulta.addSnapshotListener(getActivity(), new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
 
-                 lastVisible = documentSnapshots.getDocuments().get(documentSnapshots.size() - 1);
-                 for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
-                     if (doc.getType() == DocumentChange.Type.ADDED) {
+                    if (!documentSnapshots.isEmpty()) {
 
-                         AnuncioModel anuncioModel = doc.getDocument().toObject(AnuncioModel.class);
-                         ListPostanuncios.add(anuncioModel);
+                        lastVisible = documentSnapshots.getDocuments().get(documentSnapshots.size() - 1);
+                        for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
+                            if (doc.getType() == DocumentChange.Type.ADDED) {
 
-                         adapterAnuncio.notifyDataSetChanged();
+                                AnuncioModel anuncioModel = doc.getDocument().toObject(AnuncioModel.class);
+                                ListPostanuncios.add(anuncioModel);
+                                adapterAnuncio.notifyDataSetChanged();
 
-                     }
-                 }
-             }
+                            }
+                        }
+                    }
 
-             }
-         });
+                }
+            });
 
-
+        }
      }
 
 }

@@ -24,7 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class RegistrarUsuarioActivity extends AppCompatActivity {
 
-    private EditText edtcorreo,edtnombre, edtpassword,edtconfirmarpass,edtusuario;
+    private EditText edtcorreo, edtpassword,edtconfirmarpass;
     private Button crear,irprincipal;
     private ProgressBar pgbar;
     private FirebaseAuth mAuth;
@@ -34,15 +34,14 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_registrar_usuario);
+
         showToolbar(getResources().getString(R.string.toolbar_tittle_createaccount), true);
 
         mAuth = FirebaseAuth.getInstance();
 
         edtcorreo = (EditText) findViewById(R.id.email);
-        edtnombre = (EditText) findViewById(R.id.name);
         edtpassword = (EditText) findViewById(R.id.password_createaccount);
         edtconfirmarpass = (EditText) findViewById(R.id.confirmPassword);
-        edtusuario = (EditText) findViewById(R.id.user);
         crear = (Button) findViewById(R.id.joinUs);
         irprincipal = (Button) findViewById(R.id.gologin);
 
