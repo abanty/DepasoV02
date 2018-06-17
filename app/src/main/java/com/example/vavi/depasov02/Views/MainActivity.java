@@ -14,26 +14,36 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 import com.example.vavi.depasov02.R;
-import com.example.vavi.depasov02.Views.Fragments.CuentaFragment;
-import com.example.vavi.depasov02.Views.Fragments.InicioFragment;
-import com.example.vavi.depasov02.Views.Fragments.NotificacionesFragment;
+//import com.example.vavi.depasov02.Views.Fragments.CuentaFragment;
+//import com.example.vavi.depasov02.Views.Fragments.InicioFragment;
+//import com.example.vavi.depasov02.Views.Fragments.NotificacionesFragment;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity {
 
 
     private Toolbar toolbar;
     private FirebaseAuth mAuth;
+    private FirebaseFirestore firebaseFirestore;
+    private String current_user_id;
+
 
     private FloatingActionButton addanunciobtn;
-    private BottomNavigationView bottommenu_nav;
-    private InicioFragment inicioFragment;
-    private NotificacionesFragment notificacionesFragment;
-    private CuentaFragment cuentaFragment;
+//    private BottomNavigationView bottommenu_nav;
+
+    // 3 Fragmentos
+//    private InicioFragment inicioFragment;
+//    private NotificacionesFragment notificacionesFragment;
+//    private CuentaFragment cuentaFragment;
 
 
     @Override
@@ -42,49 +52,48 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mAuth = FirebaseAuth.getInstance();
+        firebaseFirestore = FirebaseFirestore.getInstance();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("INMUEBLES");
+        getSupportActionBar().setTitle("De´Paso - APP");
         toolbar.setTitleTextColor(0xFFFFFFFF);
 
+        addanunciobtn = findViewById(R.id.btn_add_anuncio);
 
-
-        if (mAuth.getCurrentUser() != null){
-
-            bottommenu_nav = findViewById(R.id.barra_nav_menu);
+//        bottommenu_nav = findViewById(R.id.barra_nav_menu);
 
 //        FRAGMENTOS
-        inicioFragment = new InicioFragment();
-        notificacionesFragment = new NotificacionesFragment();
-        cuentaFragment = new CuentaFragment();
+//        inicioFragment = new InicioFragment();
+//        notificacionesFragment = new NotificacionesFragment();
+//        cuentaFragment = new CuentaFragment();
+//
+//        remplazarfragment(inicioFragment);
+//
+//        bottommenu_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.bottom_action_inicio:
+//                        remplazarfragment(inicioFragment);
+//                        return true;
+//
+//                    case R.id.bottom_action_not:
+//                        remplazarfragment(notificacionesFragment);
+//                        return true;
+//
+//                    case R.id.bottom_action_cuenta:
+//                        remplazarfragment(cuentaFragment);
+//                        return true;
+//
+//                    default:
+//                        return false;
+//                }
+//            }
+//        });
 
-        remplazarfragment(inicioFragment);
 
-        bottommenu_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.bottom_action_inicio:
-                        remplazarfragment(inicioFragment);
-                        return true;
-
-                    case R.id.bottom_action_not:
-                        remplazarfragment(notificacionesFragment);
-                        return true;
-
-                    case R.id.bottom_action_cuenta:
-                        remplazarfragment(cuentaFragment);
-                        return true;
-
-                    default:
-                        return false;
-                }
-            }
-        });
-
-
-        addanunciobtn = (FloatingActionButton) findViewById(R.id.btn_add_anuncio);
+        /*EVENTO PARA MANDAR A LA ACTIVIDAD DE REGISTRAR ANUNCIOS*/
         addanunciobtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,16 +104,45 @@ public class MainActivity extends AppCompatActivity {
             }
           });
 
-        }
-    }
 
+    }
+//
     @Override
     protected void onStart() {
         super.onStart();
+
         FirebaseUser usuarioactual = FirebaseAuth.getInstance().getCurrentUser(); //Comprobamos la existencia de una sesion de usuario iniciada
         if (usuarioactual == null){
-           Enviaralprincipal();
+
+           EnviaralLogin();
+
+        }else{
+
+            current_user_id = mAuth.getCurrentUser().getUid();
+
+            firebaseFirestore.collection("Usuarios").document(current_user_id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                    if (task.isSuccessful()){
+
+                        if (!task.getResult().exists()){
+
+                               Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
+                               startActivity(setupIntent);
+                        }
+
+                    }else{
+
+                        String MensajeError = task.getException().getMessage();
+                        Toast.makeText(MainActivity.this, "Error : " + MensajeError, Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+            });
         }
+
     }
 
 
@@ -120,8 +158,10 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
+
             case R.id.accion_cerrarsesion:
                 cerrarsesion();
+
                 return true;
 
             case R.id.accion_configurar:
@@ -129,30 +169,35 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(opcionesIntent);
 
             default:
+
                 return false;
 
         }
 
-        
     }
+
 
     private void cerrarsesion() {
+
         mAuth.signOut();
-        Enviaralprincipal();
+        EnviaralLogin();
+
     }
 
 
-    private void Enviaralprincipal() {
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
+    private void EnviaralLogin() {
+
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(loginIntent);
         finish();
+
     }
-
-
-    private void remplazarfragment(Fragment fragment){
-        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.contenedor_principal,fragment);
-        fragmentTransaction.commit();
-    }
-
+//
+//
+//    private void remplazarfragment(Fragment fragment){
+//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//        fragmentTransaction.replace(R.id.contenedor_principal,fragment);
+//        fragmentTransaction.commit();
+//    }
+//
 }

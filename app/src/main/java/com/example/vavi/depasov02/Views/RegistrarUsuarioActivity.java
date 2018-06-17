@@ -2,12 +2,10 @@ package com.example.vavi.depasov02.Views;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -22,13 +20,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+
 public class RegistrarUsuarioActivity extends AppCompatActivity {
 
     private EditText edtcorreo, edtpassword,edtconfirmarpass;
-    private Button crear,irprincipal;
-    private ProgressBar pgbar;
+    private Button btnregistrar, btnirprincipal;
+    private ProgressBar ProgressBarRegistrarACC;
     private FirebaseAuth mAuth;
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,25 +38,22 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        edtcorreo = (EditText) findViewById(R.id.email);
-        edtpassword = (EditText) findViewById(R.id.password_createaccount);
-        edtconfirmarpass = (EditText) findViewById(R.id.confirmPassword);
-        crear = (Button) findViewById(R.id.joinUs);
-        irprincipal = (Button) findViewById(R.id.gologin);
+        edtcorreo =  findViewById(R.id.email);
+        edtpassword =  findViewById(R.id.password_createaccount);
+        edtconfirmarpass =  findViewById(R.id.confirmPassword);
+        btnregistrar =  findViewById(R.id.joinUs);
+        btnirprincipal =  findViewById(R.id.gologin);
+        ProgressBarRegistrarACC =  findViewById(R.id.progressBar2);
 
-        pgbar = (ProgressBar) findViewById(R.id.progressBar2);
-
-        irprincipal.setOnClickListener(new View.OnClickListener() {
+        btnirprincipal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Intent igoprincipal= new Intent(RegistrarUsuarioActivity.this, LoginActivity.class);
-//                startActivity(igoprincipal);
+//              Enviarallogin();
                 finish();
             }
         });
 
-
-        crear.setOnClickListener(new View.OnClickListener() {
+        btnregistrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -83,27 +79,22 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
                 if (!TextUtils.isEmpty(correo)&&!TextUtils.isEmpty(clave)&&!TextUtils.isEmpty(confirmarpass)){
                     if (clave.equals(confirmarpass)){
 
-                        pgbar.setVisibility(View.VISIBLE);
+                        ProgressBarRegistrarACC.setVisibility(View.VISIBLE);
 
                         mAuth.createUserWithEmailAndPassword(correo,clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()){
 
-//                                    Toast.makeText(RegistrarUsuarioActivity.this, "Usuario Registrado con Exito", Toast.LENGTH_SHORT).show();
-//                                    Enviaralprincipal();
-                                    Intent setupIntent = new Intent(RegistrarUsuarioActivity.this, SetupActivity.class);
-                                    startActivity(setupIntent);
-                                    finish();
-
+                                    EnviaralSetup();
 
                                 }else{
 
                                     String Mensajedeerror = task.getException().getMessage();
-                                    Toast.makeText(RegistrarUsuarioActivity.this, "Error : " + Mensajedeerror, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(RegistrarUsuarioActivity.this, "Error al Registrar : " + Mensajedeerror, Toast.LENGTH_SHORT).show();
 
                                 }
-                                pgbar.setVisibility(View.GONE);
+                                ProgressBarRegistrarACC.setVisibility(View.GONE);
                             }
                         });
                     }else{
@@ -112,12 +103,11 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void showToolbar(String title, boolean upButton) {
 
-            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+            Toolbar toolbar = findViewById(R.id.toolbar);
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle(title);
             getSupportActionBar().getThemedContext();
@@ -127,21 +117,38 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
 
         FirebaseUser usuarioreciente = mAuth.getCurrentUser();
         if (usuarioreciente!=null){
+
             Enviaralprincipal();
         }
+
     }
 
     private void Enviaralprincipal() {
 
         Intent minuevointent = new Intent(RegistrarUsuarioActivity.this, MainActivity.class);
         startActivity(minuevointent);
+        finish();
+
+    }
+
+    private void Enviarallogin() {
+
+        Intent minuevointent = new Intent(RegistrarUsuarioActivity.this, LoginActivity.class);
+        startActivity(minuevointent);
+        finish();
+
+    }
+
+
+    private void EnviaralSetup(){
+        Intent setupIntent = new Intent(RegistrarUsuarioActivity.this, SetupActivity.class);
+        startActivity(setupIntent);
         finish();
     }
 }

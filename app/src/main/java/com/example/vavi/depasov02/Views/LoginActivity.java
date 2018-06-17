@@ -23,11 +23,9 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginActivity extends AppCompatActivity {
 
     private EditText loginemail, loginpassword;
-    private Button btnlogin, btnloginface, btnlogingoogle;
-    private TextView txtresetpassword, txtcrearcuenta;
-
-    private ProgressBar progressBar;
-
+    private Button loginbtn, loginbtnface, loginbtngoogle;
+    private TextView txtresetpass, txtcrearcuenta;
+    private ProgressBar loginprogressBar;
     private FirebaseAuth mAuth;
 
     @Override
@@ -38,11 +36,12 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        loginemail = (EditText)findViewById(R.id.username);
-        loginpassword= (EditText) findViewById(R.id.password);
-        btnlogin = (Button) findViewById(R.id.login);
-        txtcrearcuenta = (TextView) findViewById(R.id.createHere);
-        progressBar = findViewById(R.id.progressBar);
+        loginemail = findViewById(R.id.username);
+        loginpassword= findViewById(R.id.password);
+        loginbtn = findViewById(R.id.login);
+        txtcrearcuenta = findViewById(R.id.createHere);
+
+        loginprogressBar = findViewById(R.id.progressBar);
 
 
         txtcrearcuenta.setOnClickListener(new View.OnClickListener() {
@@ -55,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-        btnlogin.setOnClickListener(new View.OnClickListener() {
+        loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -74,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
 
                 if (!TextUtils.isEmpty(correo) && !TextUtils.isEmpty(clave)){
-                    progressBar.setVisibility(View.VISIBLE);
+                    loginprogressBar.setVisibility(View.VISIBLE);
 
                     mAuth.signInWithEmailAndPassword(correo,clave).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
@@ -85,10 +84,13 @@ public class LoginActivity extends AppCompatActivity {
                                 Enviaralprincipal();
 
                             }else{
+
                                 String MensajeError = task.getException().getMessage();
                                 Toast.makeText(LoginActivity.this, "Error :" + MensajeError, Toast.LENGTH_SHORT).show();
+
                             }
-                            progressBar.setVisibility(View.GONE);
+
+                            loginprogressBar.setVisibility(View.GONE);
 
 
                         }
@@ -104,7 +106,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -119,8 +120,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private void Enviaralprincipal() {
 
-        Intent myintent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(myintent);
+        Intent PrincipalIntent = new Intent(LoginActivity.this, MainActivity.class);
+        startActivity(PrincipalIntent);
         finish();
     }
 }

@@ -44,13 +44,17 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class SetupActivity extends AppCompatActivity {
 
     private CircleImageView setupimage;
-    private Uri mypersonalimagen = null;
+    private Uri mypersonalimagenUri = null;
     private Toolbar tolbaruser;
     private String user_id;
     private boolean Cambiado = false;
+
+    //ELEMENTS XML
     private EditText setupName;
     private Button setupbtn;
     private ProgressBar setup_progressbar;
+
+    //SERVICES FIREBASE
     private StorageReference storageReference;
     private FirebaseAuth firebaseAuth;
     private FirebaseFirestore firebaseFirestore;
@@ -60,7 +64,6 @@ public class SetupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
         setContentView(R.layout.activity_setup);
         showToolbar(getResources().getString(R.string.toolbar_tittle_optionuser), true);
 
@@ -70,8 +73,8 @@ public class SetupActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         setupimage = findViewById(R.id.usercircle);
-        setupName = (EditText) findViewById(R.id.setup_name);
-        setupbtn = (Button) findViewById(R.id.btn_setup);
+        setupName =  findViewById(R.id.setup_name);
+        setupbtn =  findViewById(R.id.btn_setup);
         setup_progressbar = findViewById(R.id.setup_progress);
 
         setup_progressbar.setVisibility(View.VISIBLE);
@@ -84,23 +87,18 @@ public class SetupActivity extends AppCompatActivity {
                 if (task.isSuccessful()){
 
                     if (task.getResult().exists()){
-
                         String name = task.getResult().getString("nombre");
                         String image = task.getResult().getString("imagen");
 
-                        mypersonalimagen = Uri.parse(image);
-
+                        mypersonalimagenUri = Uri.parse(image);
                         setupName.setText(name);
                         RequestOptions placeholderRequest = new RequestOptions();
                         placeholderRequest.placeholder(R.drawable.usercircle);
                         Glide.with(SetupActivity.this).setDefaultRequestOptions(placeholderRequest).load(image).into(setupimage);
 
-                        /*Toast.makeText(SetupActivity.this, "Existe Data: ", Toast.LENGTH_SHORT).show();*/
-
                     }
 
                 }else{
-
                     String error = task.getException().getMessage();
                     Toast.makeText(SetupActivity.this, "FIRESTORE Error: " + error, Toast.LENGTH_SHORT).show();
 
@@ -115,9 +113,10 @@ public class SetupActivity extends AppCompatActivity {
         setupbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 final String user_name = setupName.getText().toString();
 
-                if (!TextUtils.isEmpty(user_name) && mypersonalimagen != null) {
+                if (!TextUtils.isEmpty(user_name) && mypersonalimagenUri != null) {
 
                 setup_progressbar.setVisibility(View.VISIBLE);
 
@@ -125,23 +124,30 @@ public class SetupActivity extends AppCompatActivity {
 
                         user_id = firebaseAuth.getCurrentUser().getUid();
 
-                        StorageReference image_patch = storageReference.child("profile_images").child(user_id + ".jpg");
-                        image_patch.putFile(mypersonalimagen).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        StorageReference image_patch = storageReference.child("perfil_imagenes").child(user_id + ".jpg");
+                        image_patch.putFile(mypersonalimagenUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
                                 if (task.isSuccessful()) {
+
                                     storeFirestore(task, user_name);
 
                                 } else {
+
                                     String error = task.getException().getMessage();
                                     Toast.makeText(SetupActivity.this, "Error : " + error, Toast.LENGTH_SHORT).show();
+
+                                    setup_progressbar.setVisibility(View.GONE);
                                 }
-                                setup_progressbar.setVisibility(View.GONE);
                             }
                         });
                     }else{
+
                     storeFirestore(null,user_name);
-                }
+
+                  }
+
                 }
             }
         });
@@ -159,13 +165,10 @@ public class SetupActivity extends AppCompatActivity {
                     }else{
 
                         BringImagePicker();
-
-
                     }
                 }else{
 
                     BringImagePicker();
-
                 }
             }
         });
@@ -179,27 +182,28 @@ public class SetupActivity extends AppCompatActivity {
             download_url = task.getResult().getDownloadUrl();
 
         }else{
-            download_url = mypersonalimagen;
+            download_url = mypersonalimagenUri;
 
         }
 
         Map<String, String> userMap = new HashMap<>();
         userMap.put("nombre",user_name);
         userMap.put("imagen",download_url.toString());
+
         firebaseFirestore.collection("Usuarios").document(user_id).set(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
 
                 if (task.isSuccessful()){
                     Toast.makeText(SetupActivity.this, "Configuracion Actualizada", Toast.LENGTH_SHORT).show();
-                    Intent imsetupintent = new Intent(SetupActivity.this, MainActivity.class);
-                    startActivity(imsetupintent);
+                    Intent MainIntent = new Intent(SetupActivity.this, MainActivity.class);
+                    startActivity(MainIntent);
                     finish();
 
                 }else{
-                    String error = task.getException().getMessage();
-                    Toast.makeText(SetupActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
-                }
+                String error = task.getException().getMessage();
+                Toast.makeText(SetupActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
+             }
             }
         });
     }
@@ -212,8 +216,6 @@ public class SetupActivity extends AppCompatActivity {
                 .setAspectRatio(1,1)
                 .start(SetupActivity.this);
     }
-
-    //FIN METODO ONCREATE
 
     private void showToolbar(String title, boolean upButton) {
 
@@ -235,8 +237,10 @@ public class SetupActivity extends AppCompatActivity {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
 
-                mypersonalimagen = result.getUri();
-                setupimage.setImageURI(mypersonalimagen);
+                mypersonalimagenUri = result.getUri();
+                setupimage.setImageURI(mypersonalimagenUri);
+
+                Cambiado = true;
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
 
