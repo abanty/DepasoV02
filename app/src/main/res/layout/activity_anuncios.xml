@@ -9,16 +9,14 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/nuevo_anuncio_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_degraded"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
+        android:layout_height="@dimen/marginTopToolbar"
+        android:background="@drawable/bg_degraded">
     </android.support.v7.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="55dp">
+        android:layout_marginTop="55dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,13 +25,22 @@
             android:orientation="vertical"
             android:paddingBottom="20dp">
 
+            <ProgressBar
+                android:id="@+id/anuncio_progressbar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:visibility="invisible" />
+
             <ImageView
                 android:id="@+id/anuncio_imagen"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/img_registraranuncio"
-                android:contentDescription="TODO" />
+                android:contentDescription="TODO"
+                android:layout_marginBottom="20dp"/>
 
 
             <LinearLayout
@@ -174,15 +181,19 @@
                         android:textColor="#ffffff" />
                 </LinearLayout>
 
-                <ProgressBar
-                    android:id="@+id/anuncio_progressbar"
-                    style="?android:attr/progressBarStyleHorizontal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:indeterminate="true"
-                    android:visibility="invisible" />
+
 
             </LinearLayout>
+
+
+
+            <!--<ProgressBar-->
+                <!--android:id="@+id/anuncio_progressbar"-->
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_gravity="center|bottom"-->
+                <!--android:layout_marginBottom="20dp"-->
+                <!--android:visibility="gone" />-->
 
         </LinearLayout>
     </ScrollView>
