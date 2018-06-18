@@ -24,6 +24,7 @@ import com.example.vavi.depasov02.Presentators.AdapterAnuncio;
 import com.example.vavi.depasov02.R;
 import com.example.vavi.depasov02.Views.AnunciosActivity;
 import com.example.vavi.depasov02.Views.MainActivity;
+import com.example.vavi.depasov02.Views.MapsActivity;
 import com.example.vavi.depasov02.Views.SetupActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
@@ -115,7 +116,7 @@ public class InicioFragment extends Fragment {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(getContext(), AnunciosActivity.class));
+                    startActivity(new Intent(getContext(), MapsActivity.class));
                 }
             });
 
