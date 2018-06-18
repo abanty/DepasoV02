@@ -12,21 +12,42 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/marginTopToolbar"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="15dp"
+                app:srcCompat="@drawable/btn_search_icon_detail" />
+
+            <ImageView
+                android:layout_width="97dp"
+                android:layout_height="36dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                app:srcCompat="@drawable/logo_toolbar" />
+        </RelativeLayout>
+
     </android.support.v7.widget.Toolbar>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btn_add_anuncio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/barra_nav_menu"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@mipmap/action_add" />
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/btn_add_anuncio"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="16dp"-->
+        <!--android:layout_marginEnd="16dp"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/barra_nav_menu"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:srcCompat="@mipmap/action_add" />-->
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/barra_nav_menu"

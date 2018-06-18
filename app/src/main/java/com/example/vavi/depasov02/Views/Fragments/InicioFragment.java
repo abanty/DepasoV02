@@ -1,7 +1,9 @@
 package com.example.vavi.depasov02.Views.Fragments;
 //COMENTAR SI HAY ERROR
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,7 +22,9 @@ import android.widget.Toast;
 import com.example.vavi.depasov02.Models.AnuncioModel;
 import com.example.vavi.depasov02.Presentators.AdapterAnuncio;
 import com.example.vavi.depasov02.R;
+import com.example.vavi.depasov02.Views.AnunciosActivity;
 import com.example.vavi.depasov02.Views.MainActivity;
+import com.example.vavi.depasov02.Views.SetupActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -105,6 +109,13 @@ public class InicioFragment extends Fragment {
                         }
 //                    }
 
+                }
+            });
+            FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.btn_add_anuncio);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getContext(), AnunciosActivity.class));
                 }
             });
 

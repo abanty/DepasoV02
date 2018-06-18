@@ -62,4 +62,5 @@
     <string name="title_nav_cuenta">Cuenta</string>
     <string name="t_tulo">Título</string>
     <string name="toolbar_tittle_post">Publicar Anuncio</string>
+    <string name="Registrar_pub">Publicar Anuncio</string>
 </resources>

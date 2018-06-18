@@ -1,14 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Views.Fragments.CuentaFragment">
 
+    <include layout="@layout/actionbar_toolbar"/>
+
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Cuenta de usuario" />
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/marginTopToolbar"
+            android:layout_height="150dp"
+            android:orientation="vertical"
+            android:background="@color/colorPrimary">
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/ic_android"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:text="User"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="user@email.com"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!--Aca se pondran lo que falta de configurations-->
+            <!--Registros-->
+            <!--Settings-->
+            <!--About Us-->
+            <!--Publicar!-->
+            <Button
+                android:id="@+id/buttonRegistrar"
+                android:theme="@style/RaisedButtonDark"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="@string/Registrar_pub" />
+
+            <Button
+                android:id="@+id/buttonCloseSession"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:onClick="logout"
+                android:text="@string/close_sesion"
+                android:theme="@style/RaisedButtonDark" />
+        </LinearLayout>
+    </LinearLayout>
 </FrameLayout>

@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity{
     private String current_user_id;
     private ArrayList<AnuncioModel>ListaAnuncios;
 
-    private FloatingActionButton addanunciobtn;
+//    private FloatingActionButton addanunciobtn;
     private BottomNavigationView bottommenu_nav;
 
     // 3 Fragmentos
@@ -64,10 +64,10 @@ public class MainActivity extends AppCompatActivity{
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("De´Paso - APP");
+        getSupportActionBar().setTitle("");
         toolbar.setTitleTextColor(0xFFFFFFFF);
 
-        addanunciobtn = findViewById(R.id.btn_add_anuncio);
+        //addanunciobtn = findViewById(R.id.btn_add_anuncio);
 
 
         if(mAuth.getCurrentUser() != null) {
@@ -106,15 +106,15 @@ public class MainActivity extends AppCompatActivity{
 
 
             /*FLOATINGBOTTOM CON EVENTO PARA MANDAR A LA ACTIVIDAD DE REGISTRAR ANUNCIOS*/
-            addanunciobtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent nuevo_anuncio = new Intent(MainActivity.this, AnunciosActivity.class);
-                    startActivity(nuevo_anuncio);
-
-                }
-            });
+//            addanunciobtn.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//
+//                    Intent nuevo_anuncio = new Intent(MainActivity.this, AnunciosActivity.class);
+//                    startActivity(nuevo_anuncio);
+//
+//                }
+//            });
 
         }
     }
@@ -207,6 +207,11 @@ public class MainActivity extends AppCompatActivity{
         startActivity(loginIntent);
         finish();
 
+    }
+
+    public void logout(View v) {
+        mAuth.signOut();
+        EnviaralLogin();
     }
 
 
