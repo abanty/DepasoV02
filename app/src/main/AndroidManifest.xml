@@ -32,6 +32,11 @@
             android:theme="@style/Base.Theme.AppCompat" />
         <activity android:name=".Views.AnunciosActivity"
             android:parentActivityName=".Views.MainActivity"></activity>
+
+        <activity android:name=".Views.PictureDetailActivity"
+            android:parentActivityName=".Views.MainActivity">
+
+        </activity>
     </application>
 
 </manifest>

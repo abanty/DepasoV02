@@ -24,17 +24,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/btn_favorito"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"
-                app:srcCompat="@mipmap/action_like_gray" />
+            <!--<ImageView-->
+                <!--android:id="@+id/btn_favorito"-->
+                <!--android:layout_width="32dp"-->
+                <!--android:layout_height="32dp"-->
+                <!--android:layout_marginStart="16dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"-->
+                <!--app:srcCompat="@mipmap/action_like_gray" />-->
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/anuncio_usuario_imagen"
@@ -87,43 +87,44 @@
                 android:text="Lorem ipsum dolor sit amet, soluta regione urbanitas vis in, qui elit populo ut. "
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imagen_lista_anuncio" />
+                app:layout_constraintTop_toBottomOf="@+id/imagen_lista_anuncio"
+                android:paddingBottom="50dp"/>
 
-            <TextView
-                android:id="@+id/lista_conteo_favoritos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="0 Favoritos"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btn_favorito"
-                app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion" />
+            <!--<TextView-->
+                <!--android:id="@+id/lista_conteo_favoritos"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:text="0 Favoritos"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintStart_toEndOf="@+id/btn_favorito"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion" />-->
 
-            <TextView
-                android:id="@+id/anuncio_comentario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:text="0 Comentarios"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion" />
+            <!--<TextView-->
+                <!--android:id="@+id/anuncio_comentario"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_marginEnd="16dp"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:text="0 Comentarios"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion" />-->
 
-            <ImageView
-                android:id="@+id/blog_comment_icon"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/anuncio_comentario"
-                app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"
-                app:srcCompat="@mipmap/action_comment_icon" />
+            <!--<ImageView-->
+                <!--android:id="@+id/blog_comment_icon"-->
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintEnd_toStartOf="@+id/anuncio_comentario"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"-->
+                <!--app:srcCompat="@mipmap/action_comment_icon" />-->
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>

@@ -21,6 +21,9 @@ import com.example.vavi.depasov02.R;
 //import com.example.vavi.depasov02.Views.Fragments.CuentaFragment;
 //import com.example.vavi.depasov02.Views.Fragments.InicioFragment;
 //import com.example.vavi.depasov02.Views.Fragments.NotificacionesFragment;
+import com.example.vavi.depasov02.Views.Fragments.CuentaFragment;
+import com.example.vavi.depasov02.Views.Fragments.InicioFragment;
+import com.example.vavi.depasov02.Views.Fragments.NotificacionesFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,12 +41,12 @@ public class MainActivity extends AppCompatActivity {
 
 
     private FloatingActionButton addanunciobtn;
-//    private BottomNavigationView bottommenu_nav;
+    private BottomNavigationView bottommenu_nav;
 
     // 3 Fragmentos
-//    private InicioFragment inicioFragment;
-//    private NotificacionesFragment notificacionesFragment;
-//    private CuentaFragment cuentaFragment;
+    private InicioFragment inicioFragment;
+    private NotificacionesFragment notificacionesFragment;
+    private CuentaFragment cuentaFragment;
 
 
     @Override
@@ -61,50 +64,54 @@ public class MainActivity extends AppCompatActivity {
 
         addanunciobtn = findViewById(R.id.btn_add_anuncio);
 
-//        bottommenu_nav = findViewById(R.id.barra_nav_menu);
+
+        if(mAuth.getCurrentUser() != null) {
+
+            bottommenu_nav = findViewById(R.id.barra_nav_menu);
 
 //        FRAGMENTOS
-//        inicioFragment = new InicioFragment();
-//        notificacionesFragment = new NotificacionesFragment();
-//        cuentaFragment = new CuentaFragment();
-//
-//        remplazarfragment(inicioFragment);
-//
-//        bottommenu_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-//            @Override
-//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case R.id.bottom_action_inicio:
-//                        remplazarfragment(inicioFragment);
-//                        return true;
-//
-//                    case R.id.bottom_action_not:
-//                        remplazarfragment(notificacionesFragment);
-//                        return true;
-//
-//                    case R.id.bottom_action_cuenta:
-//                        remplazarfragment(cuentaFragment);
-//                        return true;
-//
-//                    default:
-//                        return false;
-//                }
-//            }
-//        });
+            inicioFragment = new InicioFragment();
+            notificacionesFragment = new NotificacionesFragment();
+            cuentaFragment = new CuentaFragment();
+
+            remplazarfragment(inicioFragment);
 
 
-        /*EVENTO PARA MANDAR A LA ACTIVIDAD DE REGISTRAR ANUNCIOS*/
-        addanunciobtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            bottommenu_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.bottom_action_inicio:
+                            remplazarfragment(inicioFragment);
+                            return true;
 
-                Intent nuevo_anuncio = new Intent(MainActivity.this, AnunciosActivity.class);
-                startActivity(nuevo_anuncio);
+                        case R.id.bottom_action_not:
+                            remplazarfragment(notificacionesFragment);
+                            return true;
 
-            }
-          });
+                        case R.id.bottom_action_cuenta:
+                            remplazarfragment(cuentaFragment);
+                            return true;
+
+                        default:
+                            return false;
+                    }
+                }
+            });
 
 
+            /*FLOATINGBOTTOM CON EVENTO PARA MANDAR A LA ACTIVIDAD DE REGISTRAR ANUNCIOS*/
+            addanunciobtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent nuevo_anuncio = new Intent(MainActivity.this, AnunciosActivity.class);
+                    startActivity(nuevo_anuncio);
+
+                }
+            });
+
+        }
     }
 //
     @Override
@@ -192,12 +199,12 @@ public class MainActivity extends AppCompatActivity {
         finish();
 
     }
-//
-//
-//    private void remplazarfragment(Fragment fragment){
-//        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//        fragmentTransaction.replace(R.id.contenedor_principal,fragment);
-//        fragmentTransaction.commit();
-//    }
-//
+
+
+    private void remplazarfragment(Fragment fragment){
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.contenedor_principal,fragment);
+        fragmentTransaction.commit();
+    }
+
 }
