@@ -45,7 +45,7 @@ public class AnunciosActivity extends AppCompatActivity {
 
 
     private ImageView nuevaimagen;
-    private EditText edtdescripcioncorta,getEdtdescripcionlarga,edttitulo,edtprecio,edtubicacion,edttelefono;
+    private EditText edtdescripcioncorta,getEdtdescripcionlarga,edttitulo,edtprecio,edtubicacion,edttelefono,modalidad;
     private Button btnaddanuncio;
     private Uri nuevaimagenUri = null;
     private ProgressBar anuncioprogressbar;
@@ -72,6 +72,9 @@ public class AnunciosActivity extends AppCompatActivity {
 
         nuevaimagen = findViewById(R.id.anuncio_imagen);
         edtdescripcioncorta = findViewById(R.id.anuncio_descripcion);
+        modalidad = findViewById(R.id.modalidad);
+        edtprecio = findViewById(R.id.precio_registro);
+        edttelefono = findViewById(R.id.telefono);
         btnaddanuncio = findViewById(R.id.anuncio_boton);
         anuncioprogressbar = findViewById(R.id.anuncio_progressbar);
 
@@ -95,8 +98,12 @@ public class AnunciosActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 final String desc = edtdescripcioncorta.getText().toString(); //Capturamos la informacion del EditText
+                final String modo = modalidad.getText().toString(); //Capturamos la informacion del EditText
+                final String tel = edttelefono.getText().toString(); //Capturamos la informacion del EditText
+                final String prec = edtprecio.getText().toString(); //Capturamos la informacion del EditText
 
-                if (!TextUtils.isEmpty(desc)&& nuevaimagenUri!= null){
+
+                if (!TextUtils.isEmpty(desc)&&!TextUtils.isEmpty(modo)&&!TextUtils.isEmpty(tel)&&!TextUtils.isEmpty(prec)&& nuevaimagenUri!= null){
 
                     anuncioprogressbar.setVisibility(View.VISIBLE);
 
@@ -140,6 +147,9 @@ public class AnunciosActivity extends AppCompatActivity {
                                         anuncioMap.put("url_imagen",descargaUri);
                                         anuncioMap.put("renderizados",downloadthumbUri);
                                         anuncioMap.put("descripcion",desc);
+                                        anuncioMap.put("modalidad",modo);
+                                        anuncioMap.put("telefono_anuncio",tel);
+                                        anuncioMap.put("precio",prec);
                                         anuncioMap.put("id_usuario", current_user_id);
                                         anuncioMap.put("tiempo_marcado",FieldValue.serverTimestamp());
 

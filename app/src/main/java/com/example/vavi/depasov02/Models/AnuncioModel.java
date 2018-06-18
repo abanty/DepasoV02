@@ -5,13 +5,13 @@ import java.util.Date;
 
 public class AnuncioModel {
 
-    public String id_usuario, url_imagen, descripcion, renderizados, titulo_anuncio, descripcion_larga, telefono_anuncio, ubicacion, precio;
+    public String id_usuario, url_imagen, descripcion, renderizados, titulo_anuncio, descripcion_larga, telefono_anuncio, ubicacion, precio, modalidad;
     public Date tiempo_marcado;
 
     public AnuncioModel() {
     }
 
-    public AnuncioModel(String id_usuario, String url_imagen, String descripcion, String renderizados, String titulo_anuncio, String descripcion_larga, String telefono_anuncio, String ubicacion, String precio, Date tiempo_marcado) {
+    public AnuncioModel(String id_usuario, String url_imagen, String descripcion, String renderizados, String titulo_anuncio, String descripcion_larga, String telefono_anuncio, String ubicacion, String precio, String modalidad, Date tiempo_marcado) {
         this.id_usuario = id_usuario;
         this.url_imagen = url_imagen;
         this.descripcion = descripcion;
@@ -21,9 +21,9 @@ public class AnuncioModel {
         this.telefono_anuncio = telefono_anuncio;
         this.ubicacion = ubicacion;
         this.precio = precio;
+        this.modalidad = modalidad;
         this.tiempo_marcado = tiempo_marcado;
     }
-
 
     public String getId_usuario() {
         return id_usuario;
@@ -95,6 +95,14 @@ public class AnuncioModel {
 
     public void setPrecio(String precio) {
         this.precio = precio;
+    }
+
+    public String getModalidad() {
+        return modalidad;
+    }
+
+    public void setModalidad(String modalidad) {
+        this.modalidad = modalidad;
     }
 
     public Date getTiempo_marcado() {

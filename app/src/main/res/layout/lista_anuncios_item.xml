@@ -30,7 +30,7 @@
                 android:layout_height="32dp"
                 android:layout_marginEnd="80dp"
                 android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/precioanuncio"
+                app:layout_constraintEnd_toStartOf="@+id/iconsoles"
                 app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"
                 app:srcCompat="@drawable/ic_phone_black_24dp" />
 
@@ -116,7 +116,7 @@
                 app:layout_constraintVertical_bias="0.326" />
 
             <TextView
-                android:id="@+id/anuncio_comentario"
+                android:id="@+id/precioanuncio"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
                 android:layout_marginBottom="8dp"
@@ -132,14 +132,14 @@
                 app:layout_constraintVertical_bias="0.178" />
 
             <ImageView
-                android:id="@+id/precioanuncio"
+                android:id="@+id/iconsoles"
                 android:layout_width="30dp"
                 android:layout_height="35dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/anuncio_comentario"
+                app:layout_constraintEnd_toStartOf="@+id/precioanuncio"
                 app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"
                 app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/soles" />
@@ -153,12 +153,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Modo de Alquier"
-                android:textStyle="bold"
                 android:textColor="@color/colorFaceDark"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/imagen_lista_anuncio"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.919"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/anuncio_usuario_nombre"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.459" />
 

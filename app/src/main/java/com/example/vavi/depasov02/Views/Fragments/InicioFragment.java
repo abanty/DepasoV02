@@ -92,7 +92,7 @@ public class InicioFragment extends Fragment {
                 @Override
                 public void onEvent(QuerySnapshot documentSnapshots, FirebaseFirestoreException e) {
 //                    if (documentSnapshots != null) {
-                    lastVisible = documentSnapshots.getDocuments().get(documentSnapshots.size() -1);
+                    lastVisible = documentSnapshots.getDocuments().get(documentSnapshots.size()-1);
                         for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
 
                             if (doc.getType() == DocumentChange.Type.ADDED) {
@@ -130,7 +130,7 @@ public class InicioFragment extends Fragment {
 
                     if (!documentSnapshots.isEmpty()) {
 
-                        lastVisible = documentSnapshots.getDocuments().get(documentSnapshots.size() - 1);
+                        lastVisible = documentSnapshots.getDocuments().get(documentSnapshots.size()-1);
                         for (DocumentChange doc : documentSnapshots.getDocumentChanges()) {
                             if (doc.getType() == DocumentChange.Type.ADDED) {
 

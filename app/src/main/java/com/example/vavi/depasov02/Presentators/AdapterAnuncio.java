@@ -1,19 +1,20 @@
 package com.example.vavi.depasov02.Presentators;
 //COMENTAR SI HAY ERROR
-import android.app.Activity;
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
-import android.transition.Explode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -57,11 +58,21 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
+        holder.CallPhoneDirect();
 
         holder.GoAnotherActivity();
 
         String data_descripcion = Postanuncios.get(position).getDescripcion();
         holder.setDescText(data_descripcion);
+
+        String data_telefono = Postanuncios.get(position).getTelefono_anuncio();
+        holder.setPhoneText(data_telefono);
+
+        String data_precio = Postanuncios.get(position).getPrecio();
+        holder.setPrecioText(data_precio);
+
+        String data_modalidad = Postanuncios.get(position).getModalidad();
+        holder.setModoText(data_modalidad);
 
         String imagen_url = Postanuncios.get(position).getUrl_imagen();
         holder.setImgAnuncio(imagen_url);
@@ -128,6 +139,9 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
 
         private View mview;
         private TextView ViewDescripcion;
+        private TextView ViewModalidadPago;
+        private TextView ViewTelefono;
+        private TextView ViewPrecio;
         private ImageView ViewAnuncioImagen;
         private TextView ViewAnuncioFecha;
         private TextView ViewNombreUsuario;
@@ -144,6 +158,21 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
         public void setDescText(String descText){
             ViewDescripcion = mview.findViewById(R.id.anuncio_descripcion);
             ViewDescripcion.setText(descText) ;
+        }
+
+        public void setModoText(String modoText){
+            ViewModalidadPago = mview.findViewById(R.id.modalidaddepago);
+            ViewModalidadPago.setText(modoText) ;
+        }
+
+        public void setPhoneText(String celText){
+            ViewTelefono = mview.findViewById(R.id.celularanuncio);
+            ViewTelefono.setText(celText) ;
+        }
+
+        public void setPrecioText(String precioText){
+            ViewPrecio = mview.findViewById(R.id.precioanuncio);
+            ViewPrecio.setText(precioText) ;
         }
 
 
@@ -164,6 +193,25 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
 //                        context.startActivity(goanotheractivity);
 //
 //                    }
+                }
+            });
+        }
+
+        public void CallPhoneDirect(){
+            ViewTelefono = mview.findViewById(R.id.celularanuncio);
+            ViewTelefono.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String celular = ViewTelefono.getText().toString();
+
+
+                    Uri uri = Uri.parse("tel:" + celular);
+                    Intent i = new Intent(Intent.ACTION_CALL, uri);
+                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                    context.startActivity(i);
+//                    Toast.makeText(context, "HAS HECHO CLICK" + celular, Toast.LENGTH_SHORT).show();
                 }
             });
         }
