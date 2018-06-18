@@ -22,19 +22,17 @@
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="407dp">
 
-            <!--<ImageView-->
-                <!--android:id="@+id/btn_favorito"-->
-                <!--android:layout_width="32dp"-->
-                <!--android:layout_height="32dp"-->
-                <!--android:layout_marginStart="16dp"-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:layout_marginBottom="8dp"-->
-                <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--app:layout_constraintStart_toStartOf="parent"-->
-                <!--app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"-->
-                <!--app:srcCompat="@mipmap/action_like_gray" />-->
+            <ImageView
+                android:id="@+id/btn_favorito"
+                android:layout_width="29dp"
+                android:layout_height="32dp"
+                android:layout_marginEnd="80dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/precioanuncio"
+                app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"
+                app:srcCompat="@drawable/ic_phone_black_24dp" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/anuncio_usuario_imagen"
@@ -80,51 +78,64 @@
             <TextView
                 android:id="@+id/anuncio_descripcion"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:text="Lorem ipsum dolor sit amet, soluta regione urbanitas vis in, qui elit populo ut. "
+                android:paddingBottom="5dp"
+                android:text="Aqui va el texto"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imagen_lista_anuncio"
-                android:paddingBottom="50dp"/>
+                app:layout_constraintTop_toBottomOf="@+id/imagen_lista_anuncio" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/lista_conteo_favoritos"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginStart="8dp"-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:layout_marginBottom="8dp"-->
-                <!--android:text="0 Favoritos"-->
-                <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--app:layout_constraintStart_toEndOf="@+id/btn_favorito"-->
-                <!--app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion" />-->
 
-            <!--<TextView-->
-                <!--android:id="@+id/anuncio_comentario"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:layout_marginEnd="16dp"-->
-                <!--android:layout_marginBottom="8dp"-->
-                <!--android:text="0 Comentarios"-->
-                <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--app:layout_constraintEnd_toEndOf="parent"-->
-                <!--app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion" />-->
+            <TextView
+                android:id="@+id/celularanuncio"
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="-8dp"
+                android:text="991611444"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btn_favorito"
+                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"
+                app:layout_constraintVertical_bias="0.326" />
 
-            <!--<ImageView-->
-                <!--android:id="@+id/blog_comment_icon"-->
-                <!--android:layout_width="30dp"-->
-                <!--android:layout_height="30dp"-->
-                <!--android:layout_marginTop="8dp"-->
-                <!--android:layout_marginEnd="8dp"-->
-                <!--android:layout_marginBottom="8dp"-->
-                <!--app:layout_constraintBottom_toBottomOf="parent"-->
-                <!--app:layout_constraintEnd_toStartOf="@+id/anuncio_comentario"-->
-                <!--app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"-->
-                <!--app:srcCompat="@mipmap/action_comment_icon" />-->
+            <TextView
+                android:id="@+id/anuncio_comentario"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="36dp"
+                android:layout_marginTop="8dp"
+                android:text="0.00"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/precioanuncio"
+                android:layout_width="30dp"
+                android:layout_height="35dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/anuncio_comentario"
+                app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"
+                app:layout_constraintVertical_bias="0.0"
+                app:srcCompat="@drawable/soles" />
 
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>

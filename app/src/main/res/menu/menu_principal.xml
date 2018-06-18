@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/accion_buscar"
-        android:icon="@mipmap/accion_buscar"
-        android:title="@string/accion_buscar_texto"
-        app:showAsAction="always" />
+    <!--<item-->
+        <!--android:id="@+id/accion_buscar"-->
+        <!--android:icon="@mipmap/accion_buscar"-->
+        <!--android:title="@string/accion_buscar_texto"-->
+        <!--app:showAsAction="always" />-->
     <item
         android:id="@+id/accion_configurar"
         android:title="@string/accion_configuraciones" />

@@ -3,9 +3,14 @@ package com.example.vavi.depasov02.Views.Fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -15,6 +20,7 @@ import android.widget.Toast;
 import com.example.vavi.depasov02.Models.AnuncioModel;
 import com.example.vavi.depasov02.Presentators.AdapterAnuncio;
 import com.example.vavi.depasov02.R;
+import com.example.vavi.depasov02.Views.MainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -107,6 +113,7 @@ public class InicioFragment extends Fragment {
       // Inflate the layout for this fragment
         return view;
     }
+
 
      public void CargarAnuncios(){
 

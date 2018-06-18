@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 
 
@@ -14,9 +15,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 
+import com.example.vavi.depasov02.Models.AnuncioModel;
 import com.example.vavi.depasov02.R;
 //import com.example.vavi.depasov02.Views.Fragments.CuentaFragment;
 //import com.example.vavi.depasov02.Views.Fragments.InicioFragment;
@@ -31,14 +34,16 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity{
 
 
     private Toolbar toolbar;
     private FirebaseAuth mAuth;
     private FirebaseFirestore firebaseFirestore;
     private String current_user_id;
-
+    private ArrayList<AnuncioModel>ListaAnuncios;
 
     private FloatingActionButton addanunciobtn;
     private BottomNavigationView bottommenu_nav;
@@ -171,6 +176,10 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
 
+//            case R.id.accion_buscar:
+//                SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+//                return true;
+
             case R.id.accion_configurar:
                 Intent opcionesIntent = new Intent(MainActivity.this,SetupActivity.class);
                 startActivity(opcionesIntent);
@@ -206,5 +215,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.contenedor_principal,fragment);
         fragmentTransaction.commit();
     }
+
+
+
 
 }
