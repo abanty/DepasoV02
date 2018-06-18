@@ -9,7 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -18,6 +20,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.vavi.depasov02.Interfaces.ItemLongClickListener;
 import com.example.vavi.depasov02.Models.AnuncioModel;
 import com.example.vavi.depasov02.R;
 import com.example.vavi.depasov02.Views.PictureDetailActivity;
@@ -36,6 +39,10 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
 
     public List<AnuncioModel> Postanuncios;
     public Context context;
+    String phonedepa;
+    String ImagenDetalle;
+    String DescDetails;
+
 
 
     private FirebaseFirestore firebaseFirestore;
@@ -58,14 +65,16 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
+
         holder.CallPhoneDirect();
 
-        holder.GoAnotherActivity();
+//        holder.GoAnotherActivity();
 
-        String data_descripcion = Postanuncios.get(position).getDescripcion();
+
+        final String data_descripcion = Postanuncios.get(position).getDescripcion();
         holder.setDescText(data_descripcion);
 
-        String data_telefono = Postanuncios.get(position).getTelefono_anuncio();
+        final String data_telefono = Postanuncios.get(position).getTelefono_anuncio();
         holder.setPhoneText(data_telefono);
 
         String data_precio = Postanuncios.get(position).getPrecio();
@@ -74,10 +83,20 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
         String data_modalidad = Postanuncios.get(position).getModalidad();
         holder.setModoText(data_modalidad);
 
-        String imagen_url = Postanuncios.get(position).getUrl_imagen();
+        final String imagen_url = Postanuncios.get(position).getUrl_imagen();
         holder.setImgAnuncio(imagen_url);
 
         String idusuario = Postanuncios.get(position).getId_usuario() ;
+
+
+        holder.setItemLongClickListener(new ItemLongClickListener() {
+            @Override
+            public void onLongClick(int pos) {
+                phonedepa = data_telefono;
+                ImagenDetalle = imagen_url;
+                DescDetails = data_descripcion;
+            }
+        });
 
 
             //Informacion de usuario Aqui
@@ -91,7 +110,6 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
                             String ImagenUsuario = task.getResult().getString("imagen");
                             String NombreUsuario = task.getResult().getString("nombre");
 
-
                             holder.setInfoUsuario(NombreUsuario, ImagenUsuario);
 
                         }
@@ -103,7 +121,6 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
         String tiempo_fecha = DateFormat.format("MM/dd/yyyy", new Date(milisegundo)).toString();
 
         holder.setTiempo(tiempo_fecha);
-
 
 //        holder.ViewAnuncioImagen.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -123,8 +140,6 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
 //            }
 //        });
 
-
-
     }
 
     @Override
@@ -133,9 +148,29 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     }
 
 
+
+    public void getSelectedContextMenuItems(MenuItem item){
+            this.openDetailActivity(item.getTitle().toString());
+    }
+
+//    OPEN NEW ACTIVITY
+    private void openDetailActivity(String choice){
+        Intent a = new Intent(context,PictureDetailActivity.class);
+
+        a.putExtra("PHONE_KEY",phonedepa);
+        a.putExtra("IMAGEN_KEY",ImagenDetalle);
+        a.putExtra("DESCRIPCION_KEY",DescDetails);
+        a.putExtra("CHOICE_KEY",choice);
+
+        context.startActivity(a);
+
+    }
+
+
+
     //OBTENER ELEMENTOS DEL LAYOUT ITEMS
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnCreateContextMenuListener{
 
         private View mview;
         private TextView ViewDescripcion;
@@ -146,14 +181,15 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
         private TextView ViewAnuncioFecha;
         private TextView ViewNombreUsuario;
         private CircleImageView ViewFotoUsuario;
+        ItemLongClickListener itemLongClickListener;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             mview = itemView;
-//            ViewAnuncioImagen = itemView.findViewById(R.id.imagen_lista_anuncio);
+            itemView.setOnLongClickListener(this);
+            itemView.setOnCreateContextMenuListener(this);
         }
-
 
         public void setDescText(String descText){
             ViewDescripcion = mview.findViewById(R.id.anuncio_descripcion);
@@ -175,27 +211,26 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
             ViewPrecio.setText(precioText) ;
         }
 
-
-        public void GoAnotherActivity(){
-            ViewAnuncioImagen = mview.findViewById(R.id.imagen_lista_anuncio);
-            ViewAnuncioImagen.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent goanotheractivity = new Intent(context,PictureDetailActivity.class);
-                    context.startActivity(goanotheractivity);
-
-//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-//                        Explode explode = new Explode();
-//                        explode.setDuration(1000);
-//                        activity.getWindow().setEnterTransition(explode);
-//                        context.startActivity(goanotheractivity, ActivityOptionsCompat.makeSceneTransitionAnimation(activity, v, context.getString(R.string.transitionname_picture)).toBundle());
-//                    }else{
-//                        context.startActivity(goanotheractivity);
+//        public void GoAnotherActivity(){
+//            ViewAnuncioImagen = mview.findViewById(R.id.imagen_lista_anuncio);
+//            ViewAnuncioImagen.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Intent goanotheractivity = new Intent(context,PictureDetailActivity.class);
+//                    context.startActivity(goanotheractivity);
 //
-//                    }
-                }
-            });
-        }
+////                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+////                        Explode explode = new Explode();
+////                        explode.setDuration(1000);
+////                        activity.getWindow().setEnterTransition(explode);
+////                        context.startActivity(goanotheractivity, ActivityOptionsCompat.makeSceneTransitionAnimation(activity, v, context.getString(R.string.transitionname_picture)).toBundle());
+////                    }else{
+////                        context.startActivity(goanotheractivity);
+////
+////                    }
+//                }
+//            });
+//        }
 
         public void CallPhoneDirect(){
             ViewTelefono = mview.findViewById(R.id.celularanuncio);
@@ -211,7 +246,6 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
                         return;
                     }
                     context.startActivity(i);
-//                    Toast.makeText(context, "HAS HECHO CLICK" + celular, Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -226,7 +260,6 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
         }
 
 
-
         public void setTiempo(String fecha){
             ViewAnuncioFecha = mview.findViewById(R.id.fecha_anuncio);
             ViewAnuncioFecha.setText(fecha);
@@ -237,20 +270,29 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
             ViewFotoUsuario = mview.findViewById(R.id.anuncio_usuario_imagen);
             ViewNombreUsuario = mview.findViewById(R.id.anuncio_usuario_nombre);
 
-
             ViewNombreUsuario.setText(nombreuser);
-
             RequestOptions placeholderOptions = new RequestOptions();
             placeholderOptions.placeholder(R.drawable.profile_placeholder);
 
             Glide.with(context).applyDefaultRequestOptions(placeholderOptions).load(fotousuario).into(ViewFotoUsuario);
-
-
-
         }
 
 
+        public void setItemLongClickListener(ItemLongClickListener ic){
+            this.itemLongClickListener = ic;
+        }
 
+        @Override
+        public boolean onLongClick(View v) {
+            this.itemLongClickListener.onLongClick(getLayoutPosition());
+            return false;
+        }
+
+        @Override
+        public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+//            menu.setHeaderTitle("IR a : ");
+            menu.add(0,0,0,"Ver Detalle");
+        }
     }
 
 

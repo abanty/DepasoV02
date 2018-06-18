@@ -115,7 +115,14 @@ public class InicioFragment extends Fragment {
     }
 
 
-     public void CargarAnuncios(){
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+
+        adapterAnuncio.getSelectedContextMenuItems(item);
+        return super.onContextItemSelected(item);
+    }
+
+    public void CargarAnuncios(){
 
         if (firebaseAuth.getCurrentUser() != null) {
 
