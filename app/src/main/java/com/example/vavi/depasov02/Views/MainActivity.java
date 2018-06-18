@@ -209,10 +209,10 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
-    public void logout(View v) {
-        mAuth.signOut();
-        EnviaralLogin();
-    }
+//    public void logout() {
+//        mAuth.signOut();
+//        EnviaralLogin();
+//    }
 
 
     private void remplazarfragment(Fragment fragment){

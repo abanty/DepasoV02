@@ -72,7 +72,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
-                android:onClick="logout"
                 android:text="@string/close_sesion"
                 android:theme="@style/RaisedButtonDark" />
         </LinearLayout>
