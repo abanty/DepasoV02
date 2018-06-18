@@ -61,7 +61,5 @@
     <string name="botom_nav_notification">Notificaciones</string>
     <string name="title_nav_cuenta">Cuenta</string>
     <string name="t_tulo">Título</string>
-    <string name="toolbar_tittle_post">Nueva Publicación De´Paso</string>
-
-
+    <string name="toolbar_tittle_post">Publicar Anuncio</string>
 </resources>

@@ -1,167 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:cardview="http://schemas.android.com/apk/res-auto"
+
+    android:id="@+id/itemanuncio_cardview"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="@dimen/height_cardview"
+    android:layout_marginStart="@dimen/padding_recycler_margin"
+    android:layout_marginEnd="@dimen/padding_recycler_margin"
+    cardview:cardCornerRadius="@dimen/cornerradius_cardview"
+    android:layout_marginTop="@dimen/horizontal_margin">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/itemanuncio_cardview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:padding="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <android.support.constraint.ConstraintLayout
+        <ImageView
+            android:id="@+id/imagen_lista_anuncio"
             android:layout_width="match_parent"
-            android:layout_height="407dp">
+            android:layout_height="@dimen/height_cardview"
+            android:background="@drawable/logo"
+            android:scaleType="centerCrop" />
 
-            <ImageView
-                android:id="@+id/btn_favorito"
-                android:layout_width="29dp"
-                android:layout_height="32dp"
-                android:layout_marginEnd="80dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/iconsoles"
-                app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"
-                app:srcCompat="@drawable/ic_phone_black_24dp" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/anuncio_usuario_imagen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/profile_placeholder"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:src="@drawable/profile_placeholder" />
 
-            <TextView
-                android:id="@+id/anuncio_usuario_nombre"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:text="Nombre de usuario"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/anuncio_usuario_imagen"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginStart="40dp"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/fecha_anuncio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Fecha de anuncio"
-                app:layout_constraintStart_toEndOf="@+id/anuncio_usuario_imagen"
-                app:layout_constraintTop_toBottomOf="@+id/anuncio_usuario_nombre" />
+                <TextView
+                    android:id="@+id/anuncio_usuario_nombre"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/editTextColorWhite"
+                    android:text="Nombre de usuario"
+                    android:textStyle="bold" />
 
-            <ImageView
-                android:id="@+id/imagen_lista_anuncio"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="16dp"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/anuncio_usuario_imagen"
-                app:srcCompat="@drawable/image_placeholder" />
+                <TextView
+                    android:id="@+id/fecha_anuncio"
+                    android:textColor="@color/editTextColorWhite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Fecha de anuncio" />
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/backgroundText_card"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_marginDown"
+            android:paddingEnd="@dimen/activity_vertical_margin"
+            android:paddingStart="@dimen/activity_vertical_margin">
 
             <TextView
                 android:id="@+id/anuncio_descripcion"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:paddingBottom="5dp"
-                android:text="Aqui va el texto"
-                android:textSize="15dp"
-                android:textStyle="italic"
-                android:textColor="@color/colorFaceDark"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imagen_lista_anuncio" />
-
-            <View
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/height_divider"
-                android:background="@android:color/darker_gray" />
-
-            <TextView
-                android:id="@+id/celularanuncio"
-                android:layout_width="wrap_content"
-                android:layout_height="22dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="-8dp"
-                android:text="991611444"
-                android:textColor="@android:color/background_dark"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btn_favorito"
-                app:layout_constraintHorizontal_bias="0.95"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"
-                app:layout_constraintVertical_bias="0.326" />
-
-            <TextView
-                android:id="@+id/precioanuncio"
-                android:layout_width="wrap_content"
-                android:layout_height="25dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="44dp"
-                android:layout_marginTop="8dp"
-                android:text="0.00"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="20dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"
-                app:layout_constraintVertical_bias="0.178" />
-
-            <ImageView
-                android:id="@+id/iconsoles"
-                android:layout_width="30dp"
-                android:layout_height="35dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/precioanuncio"
-                app:layout_constraintTop_toBottomOf="@+id/anuncio_descripcion"
-                app:layout_constraintVertical_bias="0.0"
-                app:srcCompat="@drawable/soles" />
-
-            <TextView
-                android:id="@+id/modalidaddepago"
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Modo de Alquier"
-                android:textColor="@color/colorFaceDark"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/imagen_lista_anuncio"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/anuncio_usuario_nombre"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.459" />
+                android:text="@string/title_product"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/productnamesize" />
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-</android.support.constraint.ConstraintLayout>
+                <TextView
+                    android:id="@+id/SolesWord"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Soles_sign_card"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/priceword_texSize_Card" />
+
+                <TextView
+                    android:id="@+id/precioanuncio"
+                    android:layout_width="@dimen/widthPrice"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toEndOf="@+id/SolesWord"
+                    android:text="@string/priceword_card"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/priceword_texSize_Card" />
+
+                <TextView
+                    android:id="@+id/celularanuncio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:text="999999999"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="@dimen/priceword_texSize_Card"
+                    android:textStyle="normal" />
+
+                <ImageView
+                    android:id="@+id/likeCheckCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_toStartOf="@+id/celularanuncio"
+                    cardview:srcCompat="@drawable/ic_phone_black_24dp" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/modalidaddepago"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/descriptionhere"
+                    android:textColor="@android:color/white"
+                    android:textSize="15sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>
