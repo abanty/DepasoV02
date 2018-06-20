@@ -41,7 +41,7 @@ import java.util.Map;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class SetupActivity extends AppCompatActivity {
+public class UserPhotoActivity extends AppCompatActivity {
 
     private CircleImageView setupimage;
     private Uri mypersonalimagenUri = null;
@@ -64,7 +64,7 @@ public class SetupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        setContentView(R.layout.activity_setup);
+        setContentView(R.layout.activity_userphoto);
         showToolbar(getResources().getString(R.string.toolbar_tittle_optionuser), true);
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -94,13 +94,13 @@ public class SetupActivity extends AppCompatActivity {
                         setupName.setText(name);
                         RequestOptions placeholderRequest = new RequestOptions();
                         placeholderRequest.placeholder(R.drawable.usercircle);
-                        Glide.with(SetupActivity.this).setDefaultRequestOptions(placeholderRequest).load(image).into(setupimage);
+                        Glide.with(UserPhotoActivity.this).setDefaultRequestOptions(placeholderRequest).load(image).into(setupimage);
 
                     }
 
                 }else{
                     String error = task.getException().getMessage();
-                    Toast.makeText(SetupActivity.this, "FIRESTORE Error: " + error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UserPhotoActivity.this, "FIRESTORE Error: " + error, Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -136,7 +136,7 @@ public class SetupActivity extends AppCompatActivity {
                                 } else {
 
                                     String error = task.getException().getMessage();
-                                    Toast.makeText(SetupActivity.this, "Error : " + error, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(UserPhotoActivity.this, "Error : " + error, Toast.LENGTH_SHORT).show();
 
                                     setup_progressbar.setVisibility(View.GONE);
                                 }
@@ -157,10 +157,10 @@ public class SetupActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                    if (ContextCompat.checkSelfPermission(SetupActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
+                    if (ContextCompat.checkSelfPermission(UserPhotoActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
 
-                        Toast.makeText(SetupActivity.this, "Permisos Denegados", Toast.LENGTH_SHORT).show();
-                        ActivityCompat.requestPermissions(SetupActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
+                        Toast.makeText(UserPhotoActivity.this, "Permisos Denegados", Toast.LENGTH_SHORT).show();
+                        ActivityCompat.requestPermissions(UserPhotoActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},1);
 
                     }else{
 
@@ -195,14 +195,14 @@ public class SetupActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
 
                 if (task.isSuccessful()){
-                    Toast.makeText(SetupActivity.this, "Configuracion Actualizada", Toast.LENGTH_SHORT).show();
-                    Intent MainIntent = new Intent(SetupActivity.this, MainActivity.class);
+                    Toast.makeText(UserPhotoActivity.this, "Configuracion Actualizada", Toast.LENGTH_SHORT).show();
+                    Intent MainIntent = new Intent(UserPhotoActivity.this, MainActivity.class);
                     startActivity(MainIntent);
                     finish();
 
                 }else{
                 String error = task.getException().getMessage();
-                Toast.makeText(SetupActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
+                Toast.makeText(UserPhotoActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
              }
             }
         });
@@ -214,7 +214,7 @@ public class SetupActivity extends AppCompatActivity {
         CropImage.activity()
                 .setGuidelines(CropImageView.Guidelines.ON)
                 .setAspectRatio(1,1)
-                .start(SetupActivity.this);
+                .start(UserPhotoActivity.this);
     }
 
     private void showToolbar(String title, boolean upButton) {

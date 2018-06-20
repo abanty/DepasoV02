@@ -1,12 +1,8 @@
 package com.example.vavi.depasov02.Presentators;
 //COMENTAR SI HAY ERROR
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
 import android.view.ContextMenu;
@@ -16,7 +12,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -41,8 +36,11 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     public Context context;
     String phonedepa;
     String ImagenDetalle;
-    String DescDetails;
-
+    String LongDescDetails;
+    String Titleproductdetail;
+    String priceproducto;
+    String Modalidad;
+    String Location;
 
 
     private FirebaseFirestore firebaseFirestore;
@@ -56,7 +54,7 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.lista_anuncios_item, parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item, parent,false);
         context = parent.getContext();
         firebaseFirestore = FirebaseFirestore.getInstance();
         return new ViewHolder(view);
@@ -66,35 +64,42 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
 
-        holder.CallPhoneDirect();
+//      holder.CallPhoneDirect();
 
-//        holder.GoAnotherActivity();
-
+//      holder.GoAnotherActivity();
+        final String data_titulo = Postanuncios.get(position).getTitulo_anuncio();
+        holder.setTitleText(data_titulo);
 
         final String data_descripcion = Postanuncios.get(position).getDescripcion();
         holder.setDescText(data_descripcion);
 
-        final String data_telefono = Postanuncios.get(position).getTelefono_anuncio();
-        holder.setPhoneText(data_telefono);
+        final String data_descripcion_larga = Postanuncios.get(position).getDescripcion_larga();
+        holder.setLongDescText(data_descripcion_larga);
 
-        String data_precio = Postanuncios.get(position).getPrecio();
+        final String data_precio = Postanuncios.get(position).getPrecio();
         holder.setPrecioText(data_precio);
 
-        String data_modalidad = Postanuncios.get(position).getModalidad();
-        holder.setModoText(data_modalidad);
+        final String data_phone = Postanuncios.get(position).getTelefono_anuncio();
+        holder.setPhoneText(data_phone);
+
+        final String data_paymode = Postanuncios.get(position).getModalidad();
+        holder.setpaymodeText(data_paymode);
 
         final String imagen_url = Postanuncios.get(position).getUrl_imagen();
         holder.setImgAnuncio(imagen_url);
 
         String idusuario = Postanuncios.get(position).getId_usuario() ;
 
-
         holder.setItemLongClickListener(new ItemLongClickListener() {
             @Override
             public void onLongClick(int pos) {
-                phonedepa = data_telefono;
+                Titleproductdetail = data_titulo;
                 ImagenDetalle = imagen_url;
-                DescDetails = data_descripcion;
+                LongDescDetails = data_descripcion_larga;
+                phonedepa = data_phone;
+                priceproducto = data_precio;
+                Modalidad = data_paymode;
+
             }
         });
 
@@ -157,9 +162,12 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     private void openDetailActivity(String choice){
         Intent a = new Intent(context,PictureDetailActivity.class);
 
-        a.putExtra("PHONE_KEY",phonedepa);
+        a.putExtra("TITLE_KEY",Titleproductdetail);
         a.putExtra("IMAGEN_KEY",ImagenDetalle);
-        a.putExtra("DESCRIPCION_KEY",DescDetails);
+        a.putExtra("DESCRIPCION_LARGO_KEY",LongDescDetails);
+        a.putExtra("PRICE_KEY",priceproducto);
+        a.putExtra("PHONE_KEY",phonedepa);
+        a.putExtra("PAYMODE_KEY",Modalidad);
         a.putExtra("CHOICE_KEY",choice);
 
         context.startActivity(a);
@@ -173,7 +181,9 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnCreateContextMenuListener{
 
         private View mview;
+        private TextView ViewTitulo;
         private TextView ViewDescripcion;
+        private TextView ViewDescripcionlarga;
         private TextView ViewModalidadPago;
         private TextView ViewTelefono;
         private TextView ViewPrecio;
@@ -191,24 +201,37 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
             itemView.setOnCreateContextMenuListener(this);
         }
 
+        public void setTitleText(String titleText){
+            ViewTitulo = mview.findViewById(R.id.title_description);
+            ViewTitulo.setText(titleText) ;
+        }
+
+
         public void setDescText(String descText){
-            ViewDescripcion = mview.findViewById(R.id.anuncio_descripcion);
+            ViewDescripcion = mview.findViewById(R.id.cardview_short_description);
             ViewDescripcion.setText(descText) ;
         }
 
-        public void setModoText(String modoText){
-            ViewModalidadPago = mview.findViewById(R.id.modalidaddepago);
-            ViewModalidadPago.setText(modoText) ;
+        public void setLongDescText(String longdescText){
+            ViewDescripcionlarga = mview.findViewById(R.id.longdesc);
+            ViewDescripcionlarga.setText(longdescText);
         }
 
-        public void setPhoneText(String celText){
-            ViewTelefono = mview.findViewById(R.id.celularanuncio);
-            ViewTelefono.setText(celText) ;
-        }
 
         public void setPrecioText(String precioText){
-            ViewPrecio = mview.findViewById(R.id.precioanuncio);
+            ViewPrecio = mview.findViewById(R.id.price_ad);
             ViewPrecio.setText(precioText) ;
+        }
+
+        public void setPhoneText(String phoneText){
+            ViewTelefono = mview.findViewById(R.id.phone);
+            ViewTelefono.setText(phoneText) ;
+        }
+
+
+        public void setpaymodeText(String paymodeText){
+            ViewModalidadPago = mview.findViewById(R.id.modo);
+            ViewModalidadPago.setText(paymodeText) ;
         }
 
 //        public void GoAnotherActivity(){
@@ -232,27 +255,27 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
 //            });
 //        }
 
-        public void CallPhoneDirect(){
-            ViewTelefono = mview.findViewById(R.id.celularanuncio);
-            ViewTelefono.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String celular = ViewTelefono.getText().toString();
-
-
-                    Uri uri = Uri.parse("tel:" + celular);
-                    Intent i = new Intent(Intent.ACTION_CALL, uri);
-                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-                    context.startActivity(i);
-                }
-            });
-        }
+//        public void CallPhoneDirect(){
+//            ViewTelefono = mview.findViewById(R.id.celularanuncio);
+//            ViewTelefono.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    String celular = ViewTelefono.getText().toString();
+//
+//
+//                    Uri uri = Uri.parse("tel:" + celular);
+//                    Intent i = new Intent(Intent.ACTION_CALL, uri);
+//                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                        return;
+//                    }
+//                    context.startActivity(i);
+//                }
+//            });
+//        }
 
 
         public void setImgAnuncio(String downloadUri){
-            ViewAnuncioImagen = mview.findViewById(R.id.imagen_lista_anuncio);
+            ViewAnuncioImagen = mview.findViewById(R.id.cardview_image);
             RequestOptions requestOptions = new RequestOptions();
             requestOptions.placeholder(R.drawable.image_placeholder);
 

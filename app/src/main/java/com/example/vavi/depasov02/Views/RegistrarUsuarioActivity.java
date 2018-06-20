@@ -147,7 +147,7 @@ public class RegistrarUsuarioActivity extends AppCompatActivity {
 
 
     private void EnviaralSetup(){
-        Intent setupIntent = new Intent(RegistrarUsuarioActivity.this, SetupActivity.class);
+        Intent setupIntent = new Intent(RegistrarUsuarioActivity.this, UserPhotoActivity.class);
         startActivity(setupIntent);
         finish();
     }

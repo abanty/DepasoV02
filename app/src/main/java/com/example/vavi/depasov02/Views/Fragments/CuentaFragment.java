@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.vavi.depasov02.R;
-import com.example.vavi.depasov02.Views.AnunciosActivity;
+import com.example.vavi.depasov02.Views.RegistrarAnunciosActivity;
 import com.example.vavi.depasov02.Views.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -43,7 +43,7 @@ public class CuentaFragment extends Fragment {
         registerAnuncio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                    Intent nuevo_anuncio = new Intent(getActivity(), AnunciosActivity.class);
+                    Intent nuevo_anuncio = new Intent(getActivity(), RegistrarAnunciosActivity.class);
                     startActivity(nuevo_anuncio);
             }
         });

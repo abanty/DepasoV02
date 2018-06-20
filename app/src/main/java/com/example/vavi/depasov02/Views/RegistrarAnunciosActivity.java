@@ -36,16 +36,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.UUID;
 
 import id.zelory.compressor.Compressor;
 
-public class AnunciosActivity extends AppCompatActivity {
+public class RegistrarAnunciosActivity extends AppCompatActivity {
 
 
     private ImageView nuevaimagen;
-    private EditText edtdescripcioncorta,getEdtdescripcionlarga,edttitulo,edtprecio,edtubicacion,edttelefono,modalidad;
+    private EditText edtdescripcioncorta, edtdescripcionlarga,edttitulo,edtprecio,edtubicacion,edttelefono,modalidad;
     private Button btnaddanuncio;
     private Uri nuevaimagenUri = null;
     private ProgressBar anuncioprogressbar;
@@ -59,7 +58,7 @@ public class AnunciosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anuncios);
+        setContentView(R.layout.activity_registraranuncios);
 
         showToolbar2(getResources().getString(R.string.toolbar_tittle_post), true);
 
@@ -71,10 +70,14 @@ public class AnunciosActivity extends AppCompatActivity {
 
 
         nuevaimagen = findViewById(R.id.anuncio_imagen);
-        edtdescripcioncorta = findViewById(R.id.anuncio_descripcion);
+
+        edtdescripcioncorta = findViewById(R.id.short_description);
         modalidad = findViewById(R.id.modalidad);
-        edtprecio = findViewById(R.id.precio_registro);
-        edttelefono = findViewById(R.id.telefono);
+        edtprecio = findViewById(R.id.product_price);
+        edttelefono = findViewById(R.id.product_phone);
+        edtdescripcionlarga = findViewById(R.id.long_description);
+        edttitulo = findViewById(R.id.product_title);
+
         btnaddanuncio = findViewById(R.id.anuncio_boton);
         anuncioprogressbar = findViewById(R.id.anuncio_progressbar);
 
@@ -89,21 +92,22 @@ public class AnunciosActivity extends AppCompatActivity {
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .setMinCropResultSize(512,512)
                         .setAspectRatio(1,1)
-                        .start(AnunciosActivity.this);
+                        .start(RegistrarAnunciosActivity.this);
             }
         });
 
         btnaddanuncio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                final String desc = edtdescripcioncorta.getText().toString(); //Capturamos la informacion del EditText
-                final String modo = modalidad.getText().toString(); //Capturamos la informacion del EditText
+                final String title = edttitulo.getText().toString(); //Capturamos la informacion del EditText
+                final String shortdesc = edtdescripcioncorta.getText().toString(); //Capturamos la informacion del EditText
+                final String longdesc = edtdescripcionlarga.getText().toString(); //Capturamos la informacion del EditText
+                //aqui va el string ubicacion
                 final String tel = edttelefono.getText().toString(); //Capturamos la informacion del EditText
                 final String prec = edtprecio.getText().toString(); //Capturamos la informacion del EditText
+                final String modo = modalidad.getText().toString(); //Capturamos la informacion del EditText
 
-
-                if (!TextUtils.isEmpty(desc)&&!TextUtils.isEmpty(modo)&&!TextUtils.isEmpty(tel)&&!TextUtils.isEmpty(prec)&& nuevaimagenUri!= null){
+                if (!TextUtils.isEmpty(title)&&!TextUtils.isEmpty(shortdesc)&&!TextUtils.isEmpty(longdesc)&&!TextUtils.isEmpty(tel)&&!TextUtils.isEmpty(prec)&&!TextUtils.isEmpty(modo)&& nuevaimagenUri != null){
 
                     anuncioprogressbar.setVisibility(View.VISIBLE);
 
@@ -121,7 +125,7 @@ public class AnunciosActivity extends AppCompatActivity {
                                 File nuevoarchivoimagen = new File(nuevaimagenUri.getPath());
 
                                 try {
-                                    comprimirArchivoImagen = new Compressor(AnunciosActivity.this)
+                                    comprimirArchivoImagen = new Compressor(RegistrarAnunciosActivity.this)
                                             .setMaxHeight(100)
                                             .setMaxWidth(100)
                                             .setQuality(2)
@@ -146,10 +150,12 @@ public class AnunciosActivity extends AppCompatActivity {
                                         Map<String, Object> anuncioMap = new HashMap<>();
                                         anuncioMap.put("url_imagen",descargaUri);
                                         anuncioMap.put("renderizados",downloadthumbUri);
-                                        anuncioMap.put("descripcion",desc);
-                                        anuncioMap.put("modalidad",modo);
-                                        anuncioMap.put("telefono_anuncio",tel);
+                                        anuncioMap.put("descripcion",shortdesc);
+                                        anuncioMap.put("descripcion_larga",longdesc);
+                                        anuncioMap.put("titulo_anuncio",title);
                                         anuncioMap.put("precio",prec);
+                                        anuncioMap.put("telefono_anuncio",tel);
+                                        anuncioMap.put("modalidad",modo);
                                         anuncioMap.put("id_usuario", current_user_id);
                                         anuncioMap.put("tiempo_marcado",FieldValue.serverTimestamp());
 
@@ -160,8 +166,8 @@ public class AnunciosActivity extends AppCompatActivity {
 
                                                 if (task.isSuccessful()){
 
-                                                    Toast.makeText(AnunciosActivity.this, "Anuncio registrado", Toast.LENGTH_SHORT).show();
-                                                    Intent nuevointenanuncio = new Intent(AnunciosActivity.this, MainActivity.class);
+                                                    Toast.makeText(RegistrarAnunciosActivity.this, "Anuncio registrado", Toast.LENGTH_SHORT).show();
+                                                    Intent nuevointenanuncio = new Intent(RegistrarAnunciosActivity.this, MainActivity.class);
                                                     startActivity(nuevointenanuncio);
                                                     finish();
 
@@ -193,7 +199,6 @@ public class AnunciosActivity extends AppCompatActivity {
                     });
 
                 }
-
             }
         });
 

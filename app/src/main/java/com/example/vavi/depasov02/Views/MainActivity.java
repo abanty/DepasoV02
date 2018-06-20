@@ -4,9 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 
 
@@ -14,8 +12,6 @@ import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 
@@ -110,7 +106,7 @@ public class MainActivity extends AppCompatActivity{
 //                @Override
 //                public void onClick(View v) {
 //
-//                    Intent nuevo_anuncio = new Intent(MainActivity.this, AnunciosActivity.class);
+//                    Intent nuevo_anuncio = new Intent(MainActivity.this, RegistrarAnunciosActivity.class);
 //                    startActivity(nuevo_anuncio);
 //
 //                }
@@ -140,7 +136,7 @@ public class MainActivity extends AppCompatActivity{
 
                         if (!task.getResult().exists()){
 
-                               Intent setupIntent = new Intent(MainActivity.this, SetupActivity.class);
+                               Intent setupIntent = new Intent(MainActivity.this, UserPhotoActivity.class);
                                startActivity(setupIntent);
                         }
 
@@ -181,7 +177,7 @@ public class MainActivity extends AppCompatActivity{
 //                return true;
 
             case R.id.accion_configurar:
-                Intent opcionesIntent = new Intent(MainActivity.this,SetupActivity.class);
+                Intent opcionesIntent = new Intent(MainActivity.this,UserPhotoActivity.class);
                 startActivity(opcionesIntent);
 
             default:

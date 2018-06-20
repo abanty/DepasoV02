@@ -33,14 +33,18 @@
             android:name=".Views.RegistrarUsuarioActivity"
             android:parentActivityName=".Views.LoginActivity" />
         <activity
-            android:name=".Views.SetupActivity"
+            android:name=".Views.UserPhotoActivity"
             android:parentActivityName=".Views.MainActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
-            android:name=".Views.AnunciosActivity"
-            android:parentActivityName=".Views.MainActivity" />
+            android:name=".Views.RegistrarAnunciosActivity"
+            android:parentActivityName=".Views.MainActivity">
+
+
+        </activity>>
+
         <activity
             android:name=".Views.PictureDetailActivity"
             android:parentActivityName=".Views.MainActivity"></activity>
