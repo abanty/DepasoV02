@@ -21,6 +21,7 @@
             android:background="@color/colorPrimary">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imagencuenta"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:src="@drawable/ic_android"
@@ -33,14 +34,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="8dp"
-                android:text="User"
+                android:padding="5dp"
+                android:text="Usuario:"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"/>
 
             <TextView
+                android:id="@+id/usernamefragment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="user@email.com"
+                android:textSize="15dp"
                 android:layout_gravity="center_horizontal"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"/>
