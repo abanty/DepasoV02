@@ -62,8 +62,8 @@
                         android:drawableStart="@drawable/ic_store_black_24dp"
                         android:ems="13"
                         android:hint="Título"
-                        android:inputType="textPersonName"
-                        android:maxLength="30" />
+                        android:inputType="textCapWords"
+                        android:maxLength="35" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -81,7 +81,7 @@
                         android:ems="13"
                         android:hint="Descripción corta"
                         android:inputType="textMultiLine"
-                        android:maxLength="30" />
+                        android:maxLength="70" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -98,7 +98,7 @@
                         android:drawableStart="@drawable/ic_home_black_registro_24dp"
                         android:ems="13"
                         android:hint="Descripción Larga"
-                        android:inputType="textPersonName"
+                        android:inputType="textMultiLine"
                         android:maxLength="375" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -117,7 +117,7 @@
                         android:drawableStart="@drawable/ic_attach_money_black_24dp"
                         android:ems="13"
                         android:hint="Precio"
-                        android:inputType="textPersonName"
+                        android:inputType="numberDecimal"
                         android:maxLength="14" />
                 </android.support.design.widget.TextInputLayout>
 
@@ -168,11 +168,11 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentTop="true"
                         android:layout_centerHorizontal="true"
-                        android:drawableStart="@drawable/ic_location"
+                        android:drawableStart="@drawable/ic_donut_large_black_24dp"
                         android:ems="13"
                         android:hint="Modalidad de pago"
-                        android:inputType="text"
-                        android:maxLength="20" />
+                        android:inputType="textCapWords"
+                        android:maxLength="10" />
                 </android.support.design.widget.TextInputLayout>
 
                 <LinearLayout
