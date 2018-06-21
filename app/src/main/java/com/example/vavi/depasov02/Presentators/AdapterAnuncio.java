@@ -15,9 +15,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.vavi.depasov02.Interfaces.ItemClickListener;
 import com.example.vavi.depasov02.Interfaces.ItemLongClickListener;
 import com.example.vavi.depasov02.Models.AnuncioModel;
 import com.example.vavi.depasov02.R;
+import com.example.vavi.depasov02.Views.PassDataActivity;
 import com.example.vavi.depasov02.Views.PictureDetailActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -63,10 +65,6 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
 
-
-//      holder.CallPhoneDirect();
-
-//      holder.GoAnotherActivity();
         final String data_titulo = Postanuncios.get(position).getTitulo_anuncio();
         holder.setTitleText(data_titulo);
 
@@ -100,6 +98,30 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
                 priceproducto = data_precio;
                 Modalidad = data_paymode;
 
+
+
+
+            }
+        });
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(int pos) {
+                Titleproductdetail = data_titulo;
+                ImagenDetalle = imagen_url;
+                LongDescDetails = data_descripcion_larga;
+                phonedepa = data_phone;
+                priceproducto = data_precio;
+                Modalidad = data_paymode;
+
+            Intent a = new Intent(context,PictureDetailActivity.class);
+            a.putExtra("TITLE_KEY",Titleproductdetail);
+            a.putExtra("IMAGEN_KEY",ImagenDetalle);
+            a.putExtra("DESCRIPCION_LARGO_KEY",LongDescDetails);
+            a.putExtra("PRICE_KEY",priceproducto);
+            a.putExtra("PHONE_KEY",phonedepa);
+            a.putExtra("PAYMODE_KEY",Modalidad);
+            context.startActivity(a);
             }
         });
 
@@ -158,7 +180,7 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
             this.openDetailActivity(item.getTitle().toString());
     }
 
-//    OPEN NEW ACTIVITY
+    /*OPEN NEW ACTIVITY*/
     private void openDetailActivity(String choice){
         Intent a = new Intent(context,PictureDetailActivity.class);
 
@@ -175,10 +197,9 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     }
 
 
-
     //OBTENER ELEMENTOS DEL LAYOUT ITEMS
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener, View.OnCreateContextMenuListener{
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnCreateContextMenuListener {
 
         private View mview;
         private TextView ViewTitulo;
@@ -192,11 +213,14 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
         private TextView ViewNombreUsuario;
         private CircleImageView ViewFotoUsuario;
         ItemLongClickListener itemLongClickListener;
+        ItemClickListener itemClickListener;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
             mview = itemView;
+            itemView.setOnClickListener(this);
+
             itemView.setOnLongClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
         }
@@ -305,6 +329,10 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
             this.itemLongClickListener = ic;
         }
 
+        public void setItemClickListener(ItemClickListener ic){
+            this.itemClickListener = ic;
+        }
+
         @Override
         public boolean onLongClick(View v) {
             this.itemLongClickListener.onLongClick(getLayoutPosition());
@@ -315,6 +343,15 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
 //            menu.setHeaderTitle("IR a : ");
             menu.add(0,0,0,"Ver Detalle");
+        }
+
+        @Override
+        public void onClick(View view) {
+//            Intent a = new Intent(context,PictureDetailActivity.class);
+////            a.putExtra("TITLE_KEY",Titleproductdetail);
+////            context.startActivity(a);
+            this.itemClickListener.onClick(getLayoutPosition());
+
         }
     }
 

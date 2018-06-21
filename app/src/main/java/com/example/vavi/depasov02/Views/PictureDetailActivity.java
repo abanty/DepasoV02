@@ -4,11 +4,13 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.transition.Fade;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,18 +26,18 @@ public class PictureDetailActivity extends AppCompatActivity {
 
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_picture_detail);
         showToolbar("",true);
-//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-//            getWindow().setEnterTransition(new Fade());
-//        }
-//        firebaseAuth = FirebaseAuth.getInstance();
-//        firebaseFirestore = FirebaseFirestore.getInstance();
-//        user_id = firebaseAuth.getCurrentUser().getUid(); //para validate id_usuario
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            getWindow().setEnterTransition(new Fade());
+        }
+
+
+
+
         imagenDetalle = findViewById(R.id.imageHeader);
         titulodepa = findViewById(R.id.titledetail);
         detallelargoanuncio = findViewById(R.id.longdetailspicture);
@@ -52,8 +54,6 @@ public class PictureDetailActivity extends AppCompatActivity {
         String celulardepa = i.getExtras().getString("PHONE_KEY");
         String modopago = i.getExtras().getString("PAYMODE_KEY");
         String choice = i.getExtras().getString("CHOICE_KEY");
-
-
 
 
 
@@ -79,41 +79,9 @@ public class PictureDetailActivity extends AppCompatActivity {
         });
 
 
-
-        Toast.makeText(this, choice, Toast.LENGTH_SHORT).show();
-
-//        firebaseFirestore.collection("Anuncios").document("GsxTxyoCk3cyUdNHOt2C").get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-//
-//                if (task.isSuccessful()){
-//
-//                    if (task.getResult().exists()){
-//                        String name = task.getResult().getString("descripcion");
-////                        String image = task.getResult().getString("imagen");
-//
-////                        mypersonalimagenUri = Uri.parse(image);
-//                        detallelargoanuncio.setText(name);
-////                        RequestOptions placeholderRequest = new RequestOptions();
-////                        placeholderRequest.placeholder(R.drawable.usercircle);
-////                        Glide.with(UserPhotoActivity.this).setDefaultRequestOptions(placeholderRequest).load(image).into(setupimage);
-//
-//                    }
-//
-//                }else{
-////                    String error = task.getException().getMessage();
-////                    Toast.makeText(PictureDetailActivity.this, "FIRESTORE Error: " + error, Toast.LENGTH_SHORT).show();
-//
-//                }
-//
-////                setup_progressbar.setVisibility(View.GONE);
-////                setupbtn.setEnabled(true);
-//            }
-//        });
-
+//        Toast.makeText(this, choice, Toast.LENGTH_SHORT).show();
 
    }
-
 
     public void showToolbar(String title, boolean upButton){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
