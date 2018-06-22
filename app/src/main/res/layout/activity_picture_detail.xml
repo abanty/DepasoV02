@@ -84,79 +84,76 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="#ebebeb">
-
-            <TextView
-                android:id="@+id/titledetail"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/ProductnameCard"
-                android:textColor="@android:color/background_dark"
-                android:textSize="@dimen/textsize_usernamedetail" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_divider"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:background="@android:color/darker_gray" />
-
-            <!-- ========================================================================= -->
-            <!--Inicio Precio-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:background="#ebebeb"
                 android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="wrap_content"
+
+                <TextView
+                    android:id="@+id/titledetail"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
+                    android:text="@string/ProductnameCard"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="@dimen/textsize_usernamedetail" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_divider"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:background="@android:color/darker_gray" />
+
+                <!-- ========================================================================= -->
+                <!--Inicio Precio-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
 
                         <LinearLayout
-                            android:layout_width="165dp"
-                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_marginStart="20dp"
                             android:orientation="horizontal">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="S/ "
-                                android:textSize="28sp"
-                                android:textColor="@color/colorAccent"
-                                android:layout_gravity="center"/>
+                                android:layout_gravity="center"
+                                android:text="S/."
+                                android:textColor="@color/green"
+                                android:textSize="30sp" />
 
                             <TextView
                                 android:id="@+id/pricedetailpicture"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/colorAccent"
-                                android:layout_gravity="center_horizontal"
+                                android:layout_gravity="center"
                                 android:paddingBottom="20dp"
                                 android:paddingTop="@dimen/paddingtop_tittleimagedetail"
                                 android:text="1030.000"
-                                android:textSize="30sp" />
+                                android:textColor="@color/green"
+                                android:textSize="32sp" />
                         </LinearLayout>
-                    <!--Fin Precio-->
+                        <!--Fin Precio-->
 
-                    <!-- ========================================================================= -->
+                        <!-- ========================================================================= -->
 
-                    <!--Inicio Modo Pago-->
+                        <!--Inicio Modo Pago-->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginEnd="40dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -178,14 +175,14 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                app:srcCompat="@drawable/ic_donut_large_black_24dp"/>
+                                app:srcCompat="@drawable/ic_donut_large_black_24dp" />
 
                             <TextView
                                 android:id="@+id/modopago"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
                                 android:layout_gravity="center"
+                                android:layout_marginStart="5dp"
                                 android:paddingBottom="15dp"
                                 android:paddingTop="15dp"
                                 android:text="Trimestral"
@@ -193,13 +190,12 @@
                                 android:textSize="18dp" />
                         </LinearLayout>
                     </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-            <!--Fin Modo Pago-->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_divider"
-                android:background="@android:color/darker_gray" />
+                </RelativeLayout>
+                <!--Fin Modo Pago-->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_divider"
+                    android:background="@android:color/darker_gray" />
             </LinearLayout>
             <!-- ========================================================================= -->
 
@@ -217,50 +213,50 @@
                 android:id="@+id/longdetailspicture"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:layout_gravity="center_horizontal"
                 android:paddingBottom="20dp"
-                android:textAlignment="center"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/paddingtop_tittleimagedetail"
                 android:text="Los mejores departementos de la zona a un precio accesible con un descuento considerable, y super comodo para disfrutar de las  cuatro estaciones del año. "
+                android:textAlignment="center"
                 android:textSize="@dimen/textsize_likenamedetail" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_divider"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:background="@android:color/darker_gray" />
 
             <!--=====================================================================-->
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <LinearLayout
-                    android:layout_width="199dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="25dp"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal"
-                        android:textColor="@android:color/background_dark"
                         android:layout_marginTop="20dp"
-                        android:textSize="15sp"
+                        android:layout_marginStart="10dp"
                         android:text="PUBLICADO POR:"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="15sp"
                         android:textStyle="bold" />
 
                     <RelativeLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="10dp">
+                        android:layout_height="wrap_content">
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/anuncio_usuario_imagen"
@@ -298,7 +294,9 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="25dp"
                     android:orientation="vertical">
 
                     <TextView
@@ -331,20 +329,20 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginStart="5dp"
                             android:paddingBottom="20dp"
-                            android:paddingTop="@dimen/paddingtop_tittleimagedetail"
+                            android:paddingTop="15dp"
                             android:text="991611444"
                             android:textSize="18dp" />
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
+            </RelativeLayout>
 
             <!--=====================================================================-->
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_divider"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
                 android:background="@android:color/darker_gray" />
 
             <TextView
@@ -362,14 +360,14 @@
                 android:id="@+id/Direccionanuncio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:layout_gravity="center_horizontal"
-                android:textAlignment="center"
                 android:drawableStart="@drawable/ic_location"
                 android:paddingBottom="20dp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
                 android:paddingTop="@dimen/paddingtop_tittleimagedetail"
                 android:text="Av: Peru - Mz G - Lt 105 Referencia: Parque Jose Prieto"
+                android:textAlignment="center"
                 android:textSize="18dp" />
 
             <View
@@ -381,7 +379,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="206dp"
                 android:src="@drawable/maps" />
-
 
 
         </LinearLayout>
