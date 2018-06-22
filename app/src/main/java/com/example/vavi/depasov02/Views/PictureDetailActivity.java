@@ -20,9 +20,12 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.vavi.depasov02.R;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class PictureDetailActivity extends AppCompatActivity {
-    private TextView titulodepa, detallelargoanuncio,telefonodepa,preciodepa,modopagodepa,/*DATOS USUARIO*/username,date;
-    private ImageView imagenDetalle,imagenprofile;
+    private TextView titulodepa, detallelargoanuncio,telefonodepa,preciodepa,modopagodepa,/*DATOS USUARIO*/username,date,prueba;
+    private ImageView imagenDetalle;
+    private CircleImageView imagenprofile;
 
 
 
@@ -36,10 +39,10 @@ public class PictureDetailActivity extends AppCompatActivity {
             getWindow().setEnterTransition(new Fade());
         }
 
-
+        prueba = findViewById(R.id.imgtest);
         date = findViewById(R.id.fecha_anuncio);
         username = findViewById(R.id.anuncio_usuario_nombre);
-        imagenprofile = findViewById(R.id.anuncio_usuario_imagen);
+        imagenprofile = findViewById(R.id.img_user);
         imagenDetalle = findViewById(R.id.imageHeader);
         titulodepa = findViewById(R.id.titledetail);
         detallelargoanuncio = findViewById(R.id.longdetailspicture);
@@ -56,11 +59,15 @@ public class PictureDetailActivity extends AppCompatActivity {
         String celulardepa = i.getExtras().getString("PHONE_KEY");
         String modopago = i.getExtras().getString("PAYMODE_KEY");
         String fechahora = i.getExtras().getString("DATE_KEY");
-        String usuarionombre = i.getExtras().getString("NAMEUSER_KEY");
+        String usuarionombre = i.getExtras().getString("IMGPRO_KEY");
+        String imagenprofileurl = i.getExtras().getString("NAMEUSER_KEY");
+
         String choice = i.getExtras().getString("CHOICE_KEY");
-        String imagenprofileurl = i.getExtras().getString(" IMAGEN_PROFILE_KEY");
 
 
+//        RequestOptions placeholderOptions = new RequestOptions();
+//        placeholderOptions.placeholder(R.drawable.profile_placeholder);
+        Glide.with(PictureDetailActivity.this).load(imagenprofileurl).into(imagenprofile);
         date.setText(fechahora);
         username.setText(usuarionombre);
         detallelargoanuncio.setText(detallelargo);
@@ -68,12 +75,12 @@ public class PictureDetailActivity extends AppCompatActivity {
         titulodepa.setText(titulodetalle);
         preciodepa.setText(preciodetalle);
         modopagodepa.setText(modopago);
+
+//        prueba.setText(imagenprofileurl);
         Glide.with(PictureDetailActivity.this).load(imagenurl).into(imagenDetalle);
 
 
-        RequestOptions placeholderOptions = new RequestOptions();
-        placeholderOptions.placeholder(R.drawable.profile_placeholder);
-        Glide.with(PictureDetailActivity.this).load(imagenprofileurl).into(imagenprofile);
+
 
         telefonodepa.setOnClickListener(new View.OnClickListener() {
             @Override

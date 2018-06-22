@@ -144,8 +144,8 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
 //                            holder.setInfoUsuario(NombreUsuario, ImagenUsuario);//.
 
                             Titleproductdetail = data_titulo;
-                            nameuser = NombreUsuario;
-                            imagenprofileuser = ImagenUsuario;
+                            nameuser = ImagenUsuario;
+                            imagenprofileuser = NombreUsuario;
                             ImagenDetalle = imagen_url;
                             LongDescDetails = data_descripcion_larga;
                             phonedepa = data_phone;
@@ -164,7 +164,7 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
                             a.putExtra("PAYMODE_KEY",Modalidad);
                             a.putExtra("DATE_KEY",date);
                             a.putExtra("NAMEUSER_KEY",nameuser);
-                            a.putExtra("IMAGEN_PROFILE_KEY",imagenprofileuser);
+                            a.putExtra("IMGPRO_KEY",imagenprofileuser);
                             context.startActivity(a);
 
                         }
