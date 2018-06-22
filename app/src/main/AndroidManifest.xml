@@ -60,7 +60,6 @@
         <activity
             android:name=".Views.MapsActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".Views.PassDataActivity"></activity>
     </application>
 
 </manifest>

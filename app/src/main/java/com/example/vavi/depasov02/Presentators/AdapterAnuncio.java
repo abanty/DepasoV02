@@ -10,8 +10,10 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -19,7 +21,6 @@ import com.example.vavi.depasov02.Interfaces.ItemClickListener;
 import com.example.vavi.depasov02.Interfaces.ItemLongClickListener;
 import com.example.vavi.depasov02.Models.AnuncioModel;
 import com.example.vavi.depasov02.R;
-import com.example.vavi.depasov02.Views.PassDataActivity;
 import com.example.vavi.depasov02.Views.PictureDetailActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,8 +45,16 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     String Modalidad;
     String Location;
 
+    /*UID USUARIOS DATOS:*/
+
+    String nameuser;
+    String date;
+    String imagenprofileuser;
+
 
     private FirebaseFirestore firebaseFirestore;
+
+
 
     public AdapterAnuncio(List<AnuncioModel> Postanuncios){
         this.Postanuncios = Postanuncios;
@@ -86,7 +95,25 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
         final String imagen_url = Postanuncios.get(position).getUrl_imagen();
         holder.setImgAnuncio(imagen_url);
 
-        String idusuario = Postanuncios.get(position).getId_usuario() ;
+        final String idusuario = Postanuncios.get(position).getId_usuario() ;
+        
+        long milisegundo = Postanuncios.get(position).getTiempo_marcado().getTime();
+        final String tiempo_fecha = DateFormat.format("MM/dd/yyyy", new Date(milisegundo)).toString();
+        holder.setTiempo(tiempo_fecha);
+
+//        firebaseFirestore.collection("Usuarios").document(idusuario).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+//
+//            @Override
+//            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    String ImagenUsuario;
+//                    String NombreUsuario;
+//                    ImagenUsuario= task.getResult().getString("imagen");
+//                    NombreUsuario = task.getResult().getString("nombre");
+//                    holder.setInfoUsuario(NombreUsuario, ImagenUsuario);//
+//                }
+//            }
+//        });
 
         holder.setItemLongClickListener(new ItemLongClickListener() {
             @Override
@@ -98,58 +125,55 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
                 priceproducto = data_precio;
                 Modalidad = data_paymode;
 
-
-
-
             }
         });
 
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(int pos) {
-                Titleproductdetail = data_titulo;
-                ImagenDetalle = imagen_url;
-                LongDescDetails = data_descripcion_larga;
-                phonedepa = data_phone;
-                priceproducto = data_precio;
-                Modalidad = data_paymode;
+                firebaseFirestore.collection("Usuarios").document(idusuario).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
 
-            Intent a = new Intent(context,PictureDetailActivity.class);
-            a.putExtra("TITLE_KEY",Titleproductdetail);
-            a.putExtra("IMAGEN_KEY",ImagenDetalle);
-            a.putExtra("DESCRIPCION_LARGO_KEY",LongDescDetails);
-            a.putExtra("PRICE_KEY",priceproducto);
-            a.putExtra("PHONE_KEY",phonedepa);
-            a.putExtra("PAYMODE_KEY",Modalidad);
-            context.startActivity(a);
-            }
-        });
-
-
-            //Informacion de usuario Aqui
-            firebaseFirestore.collection("Usuarios").document(idusuario).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-
-
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
+                            String ImagenUsuario;
+                            String NombreUsuario;
 
-                            String ImagenUsuario = task.getResult().getString("imagen");
-                            String NombreUsuario = task.getResult().getString("nombre");
+                            ImagenUsuario= task.getResult().getString("imagen");
+                            NombreUsuario = task.getResult().getString("nombre");
+//                            holder.setInfoUsuario(NombreUsuario, ImagenUsuario);//.
 
-                            holder.setInfoUsuario(NombreUsuario, ImagenUsuario);
+                            Titleproductdetail = data_titulo;
+                            nameuser = NombreUsuario;
+                            imagenprofileuser = ImagenUsuario;
+                            ImagenDetalle = imagen_url;
+                            LongDescDetails = data_descripcion_larga;
+                            phonedepa = data_phone;
+                            priceproducto = data_precio;
+                            Modalidad = data_paymode;
+                            /*Datos usuario*/
+                            date = tiempo_fecha;
+
+
+                            Intent a = new Intent(context,PictureDetailActivity.class);
+                            a.putExtra("TITLE_KEY",Titleproductdetail);
+                            a.putExtra("IMAGEN_KEY",ImagenDetalle);
+                            a.putExtra("DESCRIPCION_LARGO_KEY",LongDescDetails);
+                            a.putExtra("PRICE_KEY",priceproducto);
+                            a.putExtra("PHONE_KEY",phonedepa);
+                            a.putExtra("PAYMODE_KEY",Modalidad);
+                            a.putExtra("DATE_KEY",date);
+                            a.putExtra("NAMEUSER_KEY",nameuser);
+                            a.putExtra("IMAGEN_PROFILE_KEY",imagenprofileuser);
+                            context.startActivity(a);
 
                         }
                     }
+                });
+            }
+        });
 
-            });
-
-        long milisegundo = Postanuncios.get(position).getTiempo_marcado().getTime();
-        String tiempo_fecha = DateFormat.format("MM/dd/yyyy", new Date(milisegundo)).toString();
-
-        holder.setTiempo(tiempo_fecha);
-
-//        holder.ViewAnuncioImagen.setOnClickListener(new View.OnClickListener() {
+        //        holder.ViewAnuncioImagen.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //                Intent intent = new Intent(activity, PictureDetailActivity.class);
@@ -202,6 +226,7 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnCreateContextMenuListener {
 
         private View mview;
+        private CheckBox Viewaddfavorites;
         private TextView ViewTitulo;
         private TextView ViewDescripcion;
         private TextView ViewDescripcionlarga;
@@ -219,11 +244,32 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
         public ViewHolder(View itemView) {
             super(itemView);
             mview = itemView;
+
+            Viewaddfavorites = itemView.findViewById(R.id.likeCheckCard);
+            Viewaddfavorites.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (Viewaddfavorites.isChecked()){
+                        Toast.makeText(context, "Anuncio Agregado", Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(context, "Anuncio Eliminado", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+
+
+
+
+
             itemView.setOnClickListener(this);
 
             itemView.setOnLongClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
         }
+
+
+
 
         public void setTitleText(String titleText){
             ViewTitulo = mview.findViewById(R.id.title_description);
@@ -312,17 +358,17 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
             ViewAnuncioFecha.setText(fecha);
         }
 
-        public void setInfoUsuario(String nombreuser, String fotousuario){
-
-            ViewFotoUsuario = mview.findViewById(R.id.anuncio_usuario_imagen);
-            ViewNombreUsuario = mview.findViewById(R.id.anuncio_usuario_nombre);
-
-            ViewNombreUsuario.setText(nombreuser);
-            RequestOptions placeholderOptions = new RequestOptions();
-            placeholderOptions.placeholder(R.drawable.profile_placeholder);
-
-            Glide.with(context).applyDefaultRequestOptions(placeholderOptions).load(fotousuario).into(ViewFotoUsuario);
-        }
+//        public void setInfoUsuario(String nombreuser, String fotousuario){
+//
+//            ViewFotoUsuario = mview.findViewById(R.id.anuncio_usuario_imagen);
+//            ViewNombreUsuario = mview.findViewById(R.id.anuncio_usuario_nombre);
+//
+//            ViewNombreUsuario.setText(nombreuser);
+//            RequestOptions placeholderOptions = new RequestOptions();
+//            placeholderOptions.placeholder(R.drawable.profile_placeholder);
+//
+//            Glide.with(context).applyDefaultRequestOptions(placeholderOptions).load(fotousuario).into(ViewFotoUsuario);
+//        }
 
 
         public void setItemLongClickListener(ItemLongClickListener ic){

@@ -22,43 +22,19 @@
             android:background="@drawable/logo"
             android:scaleType="centerCrop" />
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/anuncio_usuario_imagen"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/profile_placeholder" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/anuncio_usuario_nombre"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="5dp"
-                    android:textColor="@color/editTextColorWhite"
-                    android:text="Nombre de usuario"
-                    android:textStyle="bold" />
-
                 <TextView
                     android:id="@+id/fecha_anuncio"
-                    android:textColor="@color/editTextColorWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Fecha de anuncio" />
+                    android:visibility="invisible"/>
             </LinearLayout>
-        </RelativeLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"

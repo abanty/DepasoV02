@@ -17,11 +17,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.vavi.depasov02.R;
 
 public class PictureDetailActivity extends AppCompatActivity {
-    private TextView titulodepa, detallelargoanuncio,telefonodepa,preciodepa,modopagodepa;
-    private ImageView imagenDetalle;
+    private TextView titulodepa, detallelargoanuncio,telefonodepa,preciodepa,modopagodepa,/*DATOS USUARIO*/username,date;
+    private ImageView imagenDetalle,imagenprofile;
 
 
 
@@ -36,8 +37,9 @@ public class PictureDetailActivity extends AppCompatActivity {
         }
 
 
-
-
+        date = findViewById(R.id.fecha_anuncio);
+        username = findViewById(R.id.anuncio_usuario_nombre);
+        imagenprofile = findViewById(R.id.anuncio_usuario_imagen);
         imagenDetalle = findViewById(R.id.imageHeader);
         titulodepa = findViewById(R.id.titledetail);
         detallelargoanuncio = findViewById(R.id.longdetailspicture);
@@ -53,10 +55,14 @@ public class PictureDetailActivity extends AppCompatActivity {
         String preciodetalle = i.getExtras().getString("PRICE_KEY");
         String celulardepa = i.getExtras().getString("PHONE_KEY");
         String modopago = i.getExtras().getString("PAYMODE_KEY");
+        String fechahora = i.getExtras().getString("DATE_KEY");
+        String usuarionombre = i.getExtras().getString("NAMEUSER_KEY");
         String choice = i.getExtras().getString("CHOICE_KEY");
+        String imagenprofileurl = i.getExtras().getString(" IMAGEN_PROFILE_KEY");
 
 
-
+        date.setText(fechahora);
+        username.setText(usuarionombre);
         detallelargoanuncio.setText(detallelargo);
         telefonodepa.setText(celulardepa);
         titulodepa.setText(titulodetalle);
@@ -64,6 +70,10 @@ public class PictureDetailActivity extends AppCompatActivity {
         modopagodepa.setText(modopago);
         Glide.with(PictureDetailActivity.this).load(imagenurl).into(imagenDetalle);
 
+
+        RequestOptions placeholderOptions = new RequestOptions();
+        placeholderOptions.placeholder(R.drawable.profile_placeholder);
+        Glide.with(PictureDetailActivity.this).load(imagenprofileurl).into(imagenprofile);
 
         telefonodepa.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +94,7 @@ public class PictureDetailActivity extends AppCompatActivity {
    }
 
     public void showToolbar(String title, boolean upButton){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(title);
         getSupportActionBar().setDisplayHomeAsUpEnabled(upButton);
