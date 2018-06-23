@@ -173,7 +173,7 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
             }
         });
 
-        //        holder.ViewAnuncioImagen.setOnClickListener(new View.OnClickListener() {
+//        holder.ViewAnuncioImagen.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
 //                Intent intent = new Intent(activity, PictureDetailActivity.class);

@@ -63,4 +63,12 @@
     <string name="t_tulo">Título</string>
     <string name="toolbar_tittle_post">Publicar Anuncio</string>
     <string name="Registrar_pub">Publicar Anuncio</string>
+
+    //Spinner
+    <string-array name="modalidad_string">
+        <item>Seleccione</item>
+        <item>Por Noche</item>
+        <item>Semanal</item>
+        <item>Mensual</item>
+    </string-array>
 </resources>

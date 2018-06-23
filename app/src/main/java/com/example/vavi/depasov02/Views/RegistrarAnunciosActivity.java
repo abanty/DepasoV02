@@ -9,10 +9,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.WindowManager;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.vavi.depasov02.R;
@@ -58,6 +61,7 @@ public class RegistrarAnunciosActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         setContentView(R.layout.activity_registraranuncios);
 
         showToolbar2(getResources().getString(R.string.toolbar_tittle_post), true);
@@ -67,7 +71,6 @@ public class RegistrarAnunciosActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         current_user_id = firebaseAuth.getCurrentUser().getUid();
-
 
         nuevaimagen = findViewById(R.id.anuncio_imagen);
 
@@ -81,6 +84,13 @@ public class RegistrarAnunciosActivity extends AppCompatActivity {
         btnaddanuncio = findViewById(R.id.anuncio_boton);
         anuncioprogressbar = findViewById(R.id.anuncio_progressbar);
 
+        Spinner mySpinner = (Spinner) findViewById(R.id.spinner);//Spinner
+
+        ArrayAdapter<String> myAdapter = new ArrayAdapter<String>(RegistrarAnunciosActivity.this,
+                android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.modalidad_string));
+        myAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner.setAdapter(myAdapter);
+
 
         /* EVENTO PARA ABRIR GALERIA DE IMAGENES
         * --------------------------------------*/
@@ -91,7 +101,7 @@ public class RegistrarAnunciosActivity extends AppCompatActivity {
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .setMinCropResultSize(512,512)
-                        .setAspectRatio(1,1)
+                        .setAspectRatio(3,2)
                         .start(RegistrarAnunciosActivity.this);
             }
         });

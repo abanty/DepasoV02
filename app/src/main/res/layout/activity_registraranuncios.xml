@@ -4,48 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Views.RegistrarAnunciosActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/nuevo_anuncio_toolbar"
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/marginTopToolbar"
-        android:background="@color/colorPrimary">
-    </android.support.v7.widget.Toolbar>
+        android:layout_height="@dimen/appbarlayout_height"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="48dp">
-
-        <LinearLayout
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsingToolbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="vertical"
-            android:paddingBottom="20dp">
-
-            <ProgressBar
-                android:id="@+id/anuncio_progressbar"
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:indeterminate="true"
-                android:visibility="invisible" />
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="@color/colorPrimary"
+            >
 
             <ImageView
                 android:id="@+id/anuncio_imagen"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img_registraranuncio"
-                android:contentDescription="TODO"
-                android:layout_marginBottom="20dp"/>
+                app:layout_collapseMode="parallax"
+                />
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/nuevo_anuncio_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/marginTopToolbar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="pin"
+                >
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/nuevo_anuncio_toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/marginTopToolbar"-->
+        <!--android:background="@color/colorPrimary">-->
+    <!--</android.support.v7.widget.Toolbar>-->
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <android.support.design.widget.TextInputLayout
@@ -98,8 +113,7 @@
                         android:drawableStart="@drawable/ic_home_black_registro_24dp"
                         android:ems="13"
                         android:hint="Descripción Larga"
-                        android:inputType="textMultiLine"
-                        android:maxLength="375" />
+                        android:inputType="textMultiLine" />
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
@@ -116,27 +130,56 @@
                         android:baselineAligned="false"
                         android:drawableStart="@drawable/ic_attach_money_black_24dp"
                         android:ems="13"
-                        android:hint="Precio"
+                        android:hint="Precio (en soles)"
                         android:inputType="numberDecimal"
                         android:maxLength="14" />
                 </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
-                    <EditText
-                        android:id="@+id/product_adress"
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="180dp"-->
+                        <!--android:layout_height="wrap_content"-->
+                        <!--android:layout_marginEnd="10dp"-->
+                        <!--&gt;-->
+
+                        <EditText
+                            android:id="@+id/product_adress"
+                            android:layout_width="180dp"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="10dp"
+                            android:drawableStart="@drawable/ic_directions_black_24dp"
+                            android:editable="false"
+                            android:ems="10"
+                            android:hint="Elige Ubicación" />
+                    <!--</LinearLayout>-->
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:drawableStart="@drawable/ic_directions_black_24dp"
-                        android:ems="13"
-                        android:hint="Ubicación en el mapa"
-                        android:inputType="textMultiLine" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_gravity="center_horizontal"
+                        android:paddingTop="10dp"
+                        android:paddingStart="15dp"
+                        android:paddingEnd="5dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Mi Ubicación"/>
+                        <Switch
+                            android:id="@+id/selectlugar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_alignParentTop="true"
+                            android:textColor="#111111" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -156,39 +199,66 @@
                         android:maxLength="9" />
                 </android.support.design.widget.TextInputLayout>
 
-
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
+                <!--Inicio-->
+                <!--=====================================================================-->
+                <RelativeLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal">
+                    android:layout_gravity="center_horizontal">
 
                     <EditText
                         android:id="@+id/modalidad"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
                         android:drawableStart="@drawable/ic_donut_large_black_24dp"
                         android:ems="13"
-                        android:hint="Modalidad de pago"
-                        android:inputType="textCapWords"
-                        android:maxLength="10" />
-                </android.support.design.widget.TextInputLayout>
+                        android:hint=" Modalidad:"
+                        android:maxLength="10"
+                        android:textSize="18sp" />
+
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_alignEnd="@+id/modalidad"
+                        android:layout_below="@+id/modalidad" />
+
+                    <RadioGroup
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_below="@+id/modalidad">
+
+                        <RadioButton
+                            android:id="@+id/radioButton"
+                            android:layout_width="87dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Alquiler" />
+
+                        <RadioButton
+                            android:id="@+id/radioButton2"
+                            android:layout_width="87dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Venta" />
+                    </RadioGroup>
+
+                </RelativeLayout>
+                <!--======================================================================-->
+                <!--Fin-->
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/horizontal_margin"
                     android:orientation="vertical">
 
-                    <Switch
-                        android:id="@+id/selectlugar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:text="Mi Ubicación "
-                        android:textColor="#111111" />
+
 
                     <Button
                         android:id="@+id/anuncio_boton"
@@ -199,23 +269,16 @@
                         android:backgroundTint="@color/colorPrimary"
                         android:text="@string/texto_nuevo_boton_anuncio"
                         android:textColor="#ffffff" />
+                    <ProgressBar
+                        android:id="@+id/anuncio_progressbar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_marginTop="20dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:indeterminate="true"
+                        android:visibility="invisible" />
                 </LinearLayout>
 
-
-
             </LinearLayout>
-
-
-
-            <!--<ProgressBar-->
-                <!--android:id="@+id/anuncio_progressbar"-->
-                <!--android:layout_width="30dp"-->
-                <!--android:layout_height="30dp"-->
-                <!--android:layout_gravity="center|bottom"-->
-                <!--android:layout_marginBottom="20dp"-->
-                <!--android:visibility="gone" />-->
-
-        </LinearLayout>
-    </ScrollView>
-
+    </android.support.v4.widget.NestedScrollView>
 </android.support.design.widget.CoordinatorLayout>
