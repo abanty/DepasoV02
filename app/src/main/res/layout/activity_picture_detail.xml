@@ -354,16 +354,6 @@
             android:textColor="@android:color/background_dark"
             android:textSize="@dimen/textsize_likenamedetail"
             android:textStyle="bold" />
-            <TextView
-                android:id="@+id/imgtest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:paddingTop="@dimen/paddingtop_tittleimagedetail"
-                android:text="aqui va url imagen usuario"
-                android:textColor="@android:color/background_dark"
-                android:textSize="@dimen/textsize_likenamedetail"
-                android:textStyle="bold" />
 
 
             <TextView
