@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.vavi.depasov02.R;
+import com.example.vavi.depasov02.Views.ListPostActivity;
 import com.example.vavi.depasov02.Views.RegistrarAnunciosActivity;
 import com.example.vavi.depasov02.Views.LoginActivity;
 import com.example.vavi.depasov02.Views.UserPhotoActivity;
@@ -33,8 +34,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * A simple {@link Fragment} subclass.
  */
 public class CuentaFragment extends Fragment {
-    private Button closesession;
-    private Button registerAnuncio;
+    private Button closesession, registerAnuncio, btnlistarAnuncio;
     private TextView textusername;
     private CircleImageView userphotoimagecircle;
     private String user_id;
@@ -63,11 +63,21 @@ public class CuentaFragment extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference();
         user_id = firebaseAuth.getCurrentUser().getUid();
 
+
+        btnlistarAnuncio = view.findViewById(R.id.buttonlist);
         textusername = view.findViewById(R.id.usernamefragment);
         userphotoimagecircle = view.findViewById(R.id.imagencuenta);
         closesession =view.findViewById(R.id.buttonCloseSession);
         registerAnuncio=view.findViewById(R.id.buttonRegistrar);
 
+
+        btnlistarAnuncio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(getContext(), ListPostActivity.class));
+            }
+        });
 
         userphotoimagecircle.setOnClickListener(new View.OnClickListener() {
             @Override

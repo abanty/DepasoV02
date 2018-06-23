@@ -71,6 +71,16 @@
                 android:text="@string/Registrar_pub" />
 
             <Button
+                android:id="@+id/buttonlist"
+                android:theme="@style/RaisedButtonDark"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:text="Ver Anuncios" />
+
+            <Button
                 android:id="@+id/buttonCloseSession"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

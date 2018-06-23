@@ -1,10 +1,15 @@
 package com.example.vavi.depasov02.Presentators;
 //COMENTAR SI HAY ERROR
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateFormat;
+import android.transition.Explode;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -32,6 +37,8 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
+import static com.example.vavi.depasov02.R.string.transitionname_picture;
+
 
 public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHolder> {
 
@@ -46,19 +53,16 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     String Location;
 
     /*UID USUARIOS DATOS:*/
-
     String nameuser;
     String date;
     String imagenprofileuser;
 
 
     private FirebaseFirestore firebaseFirestore;
-
-
+    private View view;
 
     public AdapterAnuncio(List<AnuncioModel> Postanuncios){
         this.Postanuncios = Postanuncios;
-
     }
 
     @NonNull
@@ -72,7 +76,7 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         final String data_titulo = Postanuncios.get(position).getTitulo_anuncio();
         holder.setTitleText(data_titulo);
@@ -127,46 +131,74 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
 
             }
         });
-
+////                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+////                        Explode explode = new Explode();
+////                        explode.setDuration(1000);
+////                        activity.getWindow().setEnterTransition(explode);
+////                        context.startActivity(goanotheractivity, ActivityOptionsCompat.makeSceneTransitionAnimation(activity, v, context.getString(R.string.transitionname_picture)).toBundle());
         holder.setItemClickListener(new ItemClickListener() {
             @Override
-            public void onClick(int pos) {
+            public void onClick(final int pos, final View v) {
+
                 firebaseFirestore.collection("Usuarios").document(idusuario).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
 
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    public void onComplete(@NonNull final Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
-                            String ImagenUsuario;
-                            String NombreUsuario;
 
-                            ImagenUsuario= task.getResult().getString("imagen");
-                            NombreUsuario = task.getResult().getString("nombre");
+                            final Intent a = new Intent(context, PictureDetailActivity.class);
+
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                                        Explode explode = new Explode();
+                                        explode.setDuration(1000);
+                                        ((Activity) context).getWindow().setEnterTransition(explode);
+
+                                        String ImagenUsuario;
+                                        String NombreUsuario;
+
+                                        ImagenUsuario = task.getResult().getString("imagen");
+                                        NombreUsuario = task.getResult().getString("nombre");
 //                            holder.setInfoUsuario(NombreUsuario, ImagenUsuario);//.
 
-                            Titleproductdetail = data_titulo;
-                            nameuser = ImagenUsuario;
-                            imagenprofileuser = NombreUsuario;
-                            ImagenDetalle = imagen_url;
-                            LongDescDetails = data_descripcion_larga;
-                            phonedepa = data_phone;
-                            priceproducto = data_precio;
-                            Modalidad = data_paymode;
-                            /*Datos usuario*/
-                            date = tiempo_fecha;
+                                        Titleproductdetail = data_titulo;
+                                        nameuser = ImagenUsuario;
+                                        imagenprofileuser = NombreUsuario;
+                                        ImagenDetalle = imagen_url;
+                                        LongDescDetails = data_descripcion_larga;
+                                        phonedepa = data_phone;
+                                        priceproducto = data_precio;
+                                        Modalidad = data_paymode;
+                                        /*Datos usuario*/
+                                        date = tiempo_fecha;
 
 
-                            Intent a = new Intent(context,PictureDetailActivity.class);
-                            a.putExtra("TITLE_KEY",Titleproductdetail);
-                            a.putExtra("IMAGEN_KEY",ImagenDetalle);
-                            a.putExtra("DESCRIPCION_LARGO_KEY",LongDescDetails);
-                            a.putExtra("PRICE_KEY",priceproducto);
-                            a.putExtra("PHONE_KEY",phonedepa);
-                            a.putExtra("PAYMODE_KEY",Modalidad);
-                            a.putExtra("DATE_KEY",date);
-                            a.putExtra("NAMEUSER_KEY",nameuser);
-                            a.putExtra("IMGPRO_KEY",imagenprofileuser);
-                            context.startActivity(a);
+                                        a.putExtra("TITLE_KEY", Titleproductdetail);
+                                        a.putExtra("IMAGEN_KEY", ImagenDetalle);
+                                        a.putExtra("DESCRIPCION_LARGO_KEY", LongDescDetails);
+                                        a.putExtra("PRICE_KEY", priceproducto);
+                                        a.putExtra("PHONE_KEY", phonedepa);
+                                        a.putExtra("PAYMODE_KEY", Modalidad);
+                                        a.putExtra("DATE_KEY", date);
+                                        a.putExtra("NAMEUSER_KEY", nameuser);
+                                        a.putExtra("IMGPRO_KEY", imagenprofileuser);
 
+                                context.startActivity(a,ActivityOptionsCompat.makeSceneTransitionAnimation
+                                        ((Activity) context,v,context.getString(R.string.transitionname_picture)).toBundle());
+
+
+//                                context.startActivity(a);
+                                        Toast.makeText(context, "aqui es A", Toast.LENGTH_SHORT).show();
+
+
+                            } else {
+
+
+                                Toast.makeText(context, "aqui es B", Toast.LENGTH_SHORT).show();
+
+                                context.startActivity(a);
+
+                            }
                         }
                     }
                 });
@@ -221,6 +253,8 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
     }
 
 
+
+
     //OBTENER ELEMENTOS DEL LAYOUT ITEMS
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener, View.OnCreateContextMenuListener {
@@ -257,13 +291,7 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
                 }
             });
 
-
-
-
-
-
             itemView.setOnClickListener(this);
-
             itemView.setOnLongClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
         }
@@ -304,44 +332,8 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
             ViewModalidadPago.setText(paymodeText) ;
         }
 
-//        public void GoAnotherActivity(){
-//            ViewAnuncioImagen = mview.findViewById(R.id.imagen_lista_anuncio);
-//            ViewAnuncioImagen.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent goanotheractivity = new Intent(context,PictureDetailActivity.class);
-//                    context.startActivity(goanotheractivity);
-//
-////                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-////                        Explode explode = new Explode();
-////                        explode.setDuration(1000);
-////                        activity.getWindow().setEnterTransition(explode);
-////                        context.startActivity(goanotheractivity, ActivityOptionsCompat.makeSceneTransitionAnimation(activity, v, context.getString(R.string.transitionname_picture)).toBundle());
-////                    }else{
-////                        context.startActivity(goanotheractivity);
-////
-////                    }
-//                }
-//            });
-//        }
 
-//        public void CallPhoneDirect(){
-//            ViewTelefono = mview.findViewById(R.id.celularanuncio);
-//            ViewTelefono.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    String celular = ViewTelefono.getText().toString();
-//
-//
-//                    Uri uri = Uri.parse("tel:" + celular);
-//                    Intent i = new Intent(Intent.ACTION_CALL, uri);
-//                    if (ContextCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-//                        return;
-//                    }
-//                    context.startActivity(i);
-//                }
-//            });
-//        }
+
 
 
         public void setImgAnuncio(String downloadUri){
@@ -396,7 +388,8 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
 //            Intent a = new Intent(context,PictureDetailActivity.class);
 ////            a.putExtra("TITLE_KEY",Titleproductdetail);
 ////            context.startActivity(a);
-            this.itemClickListener.onClick(getLayoutPosition());
+            this.itemClickListener.onClick(getLayoutPosition(),view);
+
 
         }
     }

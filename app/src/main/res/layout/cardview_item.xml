@@ -20,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_cardview"
             android:background="@drawable/logo"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:transitionName="@string/transitionname_picture"/>
 
 
             <LinearLayout

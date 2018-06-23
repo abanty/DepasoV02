@@ -40,7 +40,7 @@
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
             android:name=".Views.RegistrarAnunciosActivity"
-            android:parentActivityName=".Views.MainActivity"></activity>
+            android:parentActivityName=".Views.MainActivity" />
         >
         <activity
             android:name=".Views.PictureDetailActivity"
@@ -60,6 +60,7 @@
         <activity
             android:name=".Views.MapsActivity"
             android:label="@string/title_activity_maps" />
+        <activity android:name=".Views.ListPostActivity"></activity>
     </application>
 
 </manifest>
