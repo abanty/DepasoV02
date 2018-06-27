@@ -1,4 +1,4 @@
-package com.example.vavi.depasov02.Views;
+package com.example.vavi.depasov02.Views.InicioSistema;
 
 import android.Manifest;
 import android.content.Intent;
@@ -24,6 +24,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.vavi.depasov02.R;
+import com.example.vavi.depasov02.Views.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
