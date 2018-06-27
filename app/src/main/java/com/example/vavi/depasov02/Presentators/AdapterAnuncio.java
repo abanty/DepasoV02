@@ -188,13 +188,13 @@ public class AdapterAnuncio extends RecyclerView.Adapter<AdapterAnuncio.ViewHold
 
 
 //                                context.startActivity(a);
-                                        Toast.makeText(context, "aqui es A", Toast.LENGTH_SHORT).show();
+//                                        Toast.makeText(context, "aqui es A", Toast.LENGTH_SHORT).show();
 
 
                             } else {
 
 
-                                Toast.makeText(context, "aqui es B", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(context, "aqui es B", Toast.LENGTH_SHORT).show();
 
                                 context.startActivity(a);
 
