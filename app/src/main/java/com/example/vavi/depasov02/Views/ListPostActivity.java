@@ -86,12 +86,9 @@ public class ListPostActivity extends AppCompatActivity {
 
                         }
                     }
-
                 }
             });
-
         }
-
     }
 
 
@@ -100,7 +97,7 @@ public class ListPostActivity extends AppCompatActivity {
         if (firebaseAuth.getCurrentUser() != null) {
 
             Query segundaconsulta = firebaseFirestore.collection("Anuncios")
-                    .orderBy("tiempo_marcado", Query.Direction.DESCENDING)
+                    .orderBy("precio", Query.Direction.DESCENDING)
                     .startAfter(lastVisible)
                     .limit(3);
 
