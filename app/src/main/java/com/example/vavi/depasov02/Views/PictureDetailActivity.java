@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.vavi.depasov02.R;
+import com.example.vavi.depasov02.Utils.IntentUtils;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -26,6 +27,7 @@ public class PictureDetailActivity extends AppCompatActivity {
     private TextView titulodepa, detallelargoanuncio,telefonodepa,preciodepa,modopagodepa,/*DATOS USUARIO*/username,date;
     private ImageView imagenDetalle;
     private CircleImageView imagenprofile;
+    private IntentUtils intentUtils;
 
 
 
@@ -33,6 +35,7 @@ public class PictureDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        intentUtils = new IntentUtils(this);
         setContentView(R.layout.activity_picture_detail);
         showToolbar("",true);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
@@ -84,12 +87,13 @@ public class PictureDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String celularcall = telefonodepa.getText().toString();
-                Uri uri = Uri.parse("tel:" + celularcall);
-                Intent i = new Intent(Intent.ACTION_CALL, uri);
-                if (ContextCompat.checkSelfPermission(PictureDetailActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    return;
-                }
-                startActivity(i);
+                String uri = "tel:" + celularcall;
+                intentUtils.intentCall(uri);
+              //  Intent i = new Intent(Intent.ACTION_CALL, uri);
+//                if (ContextCompat.checkSelfPermission(PictureDetailActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                    return;
+//                }
+                //startActivity(i);
             }
         });
 

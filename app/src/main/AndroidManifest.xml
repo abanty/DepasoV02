@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <!--<uses-permission android:name="android.permission.CALL_PHONE" />-->
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -59,7 +59,7 @@
         <activity
             android:name=".Views.RegistrarAnunciosActivity"
             android:parentActivityName=".Views.MainActivity" />
-        >
+
         <activity
             android:name=".Views.PictureDetailActivity"
             android:parentActivityName=".Views.MainActivity" />
